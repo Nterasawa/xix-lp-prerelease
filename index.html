@@ -701,14 +701,68 @@
           </div>
         </div>
 
-        <div class="cta-buttons">
-          <a href="mailto:info@tonchi.works?subject=XiX%E5%85%88%E8%A1%8C%E5%8F%97%E4%BB%98%E7%94%B3%E3%81%97%E8%BE%BC%E3%81%BF" class="btn btn-primary btn-lg">
-            <span>先行受付に申し込む</span>
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-          <a href="https://lin.ee/xaWMqdW" target="_blank" rel="noopener" class="btn btn-secondary btn-lg">LINEで相談する</a>
+        <form id="signup-form" class="signup-form" novalidate>
+          <div class="sf-grid">
+            <label class="sf-field sf-required">
+              <span class="sf-label">法人名</span>
+              <input name="company" type="text" required autocomplete="organization" placeholder="株式会社○○○">
+            </label>
+            <label class="sf-field sf-required">
+              <span class="sf-label">ご担当者名</span>
+              <input name="name" type="text" required autocomplete="name" placeholder="山田 太郎">
+            </label>
+            <label class="sf-field">
+              <span class="sf-label">役職</span>
+              <input name="role" type="text" autocomplete="organization-title" placeholder="店長／部長 等">
+            </label>
+            <label class="sf-field sf-required">
+              <span class="sf-label">メールアドレス</span>
+              <input name="email" type="email" required autocomplete="email" placeholder="your@example.com">
+            </label>
+            <label class="sf-field sf-required">
+              <span class="sf-label">電話番号</span>
+              <input name="phone" type="tel" required autocomplete="tel" placeholder="03-0000-0000">
+            </label>
+            <label class="sf-field">
+              <span class="sf-label">店舗数</span>
+              <input name="stores" type="text" inputmode="numeric" placeholder="例：5">
+            </label>
+            <label class="sf-field sf-full">
+              <span class="sf-label">P-Brain 利用状況</span>
+              <select name="pbrain">
+                <option value="未選択">未選択</option>
+                <option value="利用中">現在 利用中</option>
+                <option value="未利用">未利用</option>
+                <option value="検討中">検討中</option>
+              </select>
+            </label>
+            <label class="sf-field sf-full">
+              <span class="sf-label">現在の課題（自由記述）</span>
+              <textarea name="challenges" rows="4" placeholder="例：イベントの効果測定がうまくできていない／競合の動きを追いきれていない 等"></textarea>
+            </label>
+          </div>
+          <p class="sf-privacy">送信することで<a href="#" target="_blank" rel="noopener">プライバシーポリシー</a>に同意したものとみなします。<br>ご記入いただいた情報はXiXの先行受付ご案内にのみ使用し、第三者へは提供しません。</p>
+          <div class="sf-submit-wrap">
+            <button type="submit" class="btn btn-primary btn-lg sf-submit">
+              <span class="sf-btn-text">先行受付に申し込む</span>
+              <svg class="sf-btn-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <a href="https://lin.ee/xaWMqdW" target="_blank" rel="noopener" class="btn btn-secondary btn-lg">LINEで相談する</a>
+          </div>
+          <p class="cta-note">※ 先行受付は先着順。定員に達し次第締切ります。お申し込み後、3営業日以内に担当よりご連絡いたします。</p>
+        </form>
+        <div id="signup-thanks" class="signup-thanks" hidden>
+          <div class="thanks-icon">
+            <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+              <circle cx="28" cy="28" r="26" stroke="url(#th-g)" stroke-width="2"/>
+              <path d="M17 28L25 36L39 20" stroke="url(#th-g)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs><linearGradient id="th-g" x1="0" y1="0" x2="56" y2="56"><stop stop-color="#10b981"/><stop offset="1" stop-color="#6366f1"/></linearGradient></defs>
+            </svg>
+          </div>
+          <h3>お申込みを受け付けました</h3>
+          <p>自動返信メールをお送りしました。<br>担当者より3営業日以内にご連絡いたします。</p>
+          <p class="thanks-note">メールが届かない場合は迷惑メールフォルダをご確認の上、<a href="mailto:info@tonchi.works">info@tonchi.works</a> までご連絡ください。</p>
         </div>
-        <p class="cta-note">※ 先行受付は先着順。定員に達し次第締切ります。お申し込み後、3営業日以内に担当よりご連絡いたします。</p>
       </div>
     </div>
   </section>
@@ -762,6 +816,18 @@
     </div>
   </footer>
 
+  <!-- Lightbox dialog -->
+  <dialog id="lightbox" class="lightbox">
+    <button type="button" class="lightbox-close" aria-label="閉じる">&times;</button>
+    <button type="button" class="lightbox-nav lightbox-prev" aria-label="前の画像">&#8249;</button>
+    <button type="button" class="lightbox-nav lightbox-next" aria-label="次の画像">&#8250;</button>
+    <img class="lightbox-img" alt="">
+    <figcaption class="lightbox-caption"></figcaption>
+    <span class="lightbox-counter"></span>
+  </dialog>
+
   <script src="js/main.js"></script>
+  <script src="js/lightbox.js"></script>
+  <script src="js/signup.js"></script>
 </body>
 </html>
