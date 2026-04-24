@@ -2,7 +2,7 @@
 (function () {
   'use strict';
 
-  const GAS_URL = 'https://script.google.com/macros/s/AKfycbzIZyV-rXGa72xjeaBTGvk30AQKBXTlnfrmXUW_OZ9d3RKcinng4gHQGA_pLmgINjvO8Q/exec';
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbyoirIbRdCg-0AHsdmXk7Ntz5EexkIcLv0THeGq6ZTWwPedFuYZGnG5pjVPLjpF9CAHzg/exec';
 
   const form = document.getElementById('signup-form');
   const thanks = document.getElementById('signup-thanks');
