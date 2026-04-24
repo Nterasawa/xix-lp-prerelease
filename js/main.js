@@ -208,7 +208,7 @@
 
   // ========== COUNTDOWN TIMER ==========
   function updateCountdown() {
-    const releaseDate = new Date('2026-04-25T00:00:00+09:00');
+    const releaseDate = new Date('2026-04-25T18:00:00+09:00');
     const now = new Date();
     const diff = releaseDate - now;
 

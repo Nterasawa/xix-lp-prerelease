@@ -2256,3 +2256,113 @@ a {
   .sf-submit { width: 100%; }
   .signup-thanks { padding: 36px 20px; }
 }
+
+/* ============================================
+   CAPACITY / 先行受付 申込状況
+   ============================================ */
+.capacity {
+  max-width: 560px;
+  margin: 0 auto 28px;
+  padding: 20px 24px;
+  background: rgba(99, 102, 241, 0.06);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 14px;
+  text-align: left;
+}
+.capacity-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  gap: 12px;
+}
+.capacity-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-family: var(--font-en);
+}
+.capacity-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 99px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(139, 92, 246, 0.25));
+  color: #c4b5fd;
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  white-space: nowrap;
+}
+.capacity-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.capacity-row {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+.cap-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.cap-bar {
+  height: 10px;
+  background: var(--bg-elevated);
+  border-radius: 99px;
+  overflow: hidden;
+  position: relative;
+}
+.cap-bar-fill {
+  display: block;
+  height: 100%;
+  width: var(--pct, 0%);
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  border-radius: 99px;
+  transition: width 1s var(--ease-out);
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.5);
+}
+.cap-value {
+  font-size: 13px;
+  color: var(--text-primary);
+  font-family: var(--font-en);
+  font-weight: 600;
+  white-space: nowrap;
+  min-width: 96px;
+  text-align: right;
+}
+.cap-value b {
+  font-size: 17px;
+  font-weight: 900;
+  color: #a5b4fc;
+  font-family: var(--font-en);
+  margin-right: 2px;
+}
+.cap-value small {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-left: 3px;
+  font-family: var(--font-jp);
+}
+.capacity-note {
+  margin-top: 14px;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.7;
+}
+.capacity-note b {
+  color: #fca5a5;
+  font-weight: 700;
+}
+@media (max-width: 600px) {
+  .capacity { padding: 16px 16px; }
+  .capacity-header { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .capacity-row { grid-template-columns: 56px 1fr auto; gap: 8px; }
+  .cap-value { min-width: 80px; font-size: 12px; }
+  .cap-value b { font-size: 15px; }
+}
