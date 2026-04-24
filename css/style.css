@@ -2366,3 +2366,70 @@ a {
   .cap-value { min-width: 80px; font-size: 12px; }
   .cap-value b { font-size: 15px; }
 }
+
+/* ============================================
+   LIVE STATE (受付中表示 — カウントダウン切替後)
+   ============================================ */
+.cta-live {
+  max-width: 560px;
+  margin: 0 auto 28px;
+  padding: 22px 28px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(99, 102, 241, 0.12));
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(16, 185, 129, 0.15);
+}
+.cta-live-pulse {
+  flex-shrink: 0;
+  position: relative;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6);
+  animation: cta-live-pulse 1.8s ease-out infinite;
+}
+@keyframes cta-live-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+  70%  { box-shadow: 0 0 0 16px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+.cta-live-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+  flex: 1;
+}
+.cta-live-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #6ee7b7;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+.cta-live-sub {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* Hero badge 受付中 状態（緑に切替） */
+.hero-badge.hero-badge-live {
+  background: rgba(16, 185, 129, 0.18);
+  border-color: rgba(16, 185, 129, 0.5);
+  color: #6ee7b7;
+}
+.hero-badge.hero-badge-live .hero-badge-dot {
+  background: #10b981;
+  animation: cta-live-pulse 1.8s ease-out infinite;
+}
+
+@media (max-width: 600px) {
+  .cta-live { padding: 18px 20px; gap: 14px; }
+  .cta-live-title { font-size: 17px; }
+  .cta-live-sub { font-size: 11px; }
+}

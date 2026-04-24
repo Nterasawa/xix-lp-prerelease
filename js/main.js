@@ -207,16 +207,44 @@
   setupCounters();
 
   // ========== COUNTDOWN TIMER ==========
+  const RELEASE_DATE = new Date('2026-04-25T18:00:00+09:00');
+  let _countdownInterval = null;
+
+  function flipToLive() {
+    const cd = document.getElementById('countdown');
+    const live = document.getElementById('cta-live');
+    if (cd) cd.hidden = true;
+    if (live) live.hidden = false;
+
+    // Hero badge も更新（1度だけ）
+    const heroBadge = document.querySelector('.hero-badge');
+    if (heroBadge && !heroBadge.dataset.flipped) {
+      heroBadge.dataset.flipped = '1';
+      heroBadge.classList.add('hero-badge-live');
+      const textSpans = heroBadge.querySelectorAll('span');
+      const lastText = textSpans[textSpans.length - 1];
+      if (lastText) lastText.textContent = '先行受付 受付中';
+    }
+
+    // CTA見出しも更新
+    const ctaTitle = document.querySelector('.cta-title');
+    if (ctaTitle && !ctaTitle.dataset.flipped) {
+      ctaTitle.dataset.flipped = '1';
+      ctaTitle.innerHTML = '先行受付、<br class="hide-pc">受付中。';
+    }
+
+    // インターバル停止（以降は不要）
+    if (_countdownInterval) {
+      clearInterval(_countdownInterval);
+      _countdownInterval = null;
+    }
+  }
+
   function updateCountdown() {
-    const releaseDate = new Date('2026-04-25T18:00:00+09:00');
-    const now = new Date();
-    const diff = releaseDate - now;
+    const diff = RELEASE_DATE - new Date();
 
     if (diff <= 0) {
-      document.getElementById('countdown-days').textContent = '00';
-      document.getElementById('countdown-hours').textContent = '00';
-      document.getElementById('countdown-minutes').textContent = '00';
-      document.getElementById('countdown-seconds').textContent = '00';
+      flipToLive();
       return;
     }
 
@@ -232,7 +260,7 @@
   }
 
   updateCountdown();
-  setInterval(updateCountdown, 1000);
+  _countdownInterval = setInterval(updateCountdown, 1000);
 
   // ========== SMOOTH SCROLL FOR ANCHOR LINKS ==========
   document.querySelectorAll('a[href^="#"]').forEach(link => {

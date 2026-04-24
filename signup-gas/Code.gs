@@ -25,6 +25,11 @@ const NOTIFY_TO = 'info@tonchi.works';              // 店舗側通知先
 const FROM_NAME = 'XiX / 株式会社頓智WORKS';          // 差出人表示名
 const REPLY_TO  = 'terasawa@tonchi.works';          // 申込者が返信したとき届く先
 
+// Slack Incoming Webhook URL（空文字のまま置くとSlack通知をスキップ）
+// 取得手順: https://api.slack.com/apps → 新規作成 → Incoming Webhooks → Add New Webhook to Workspace
+// 形式: 'https://hooks.slack.com/services/TXX/BXX/XXXXX'
+const SLACK_WEBHOOK_URL = '';
+
 // ========== エンドポイント ==========
 function doPost(e) {
   try {
@@ -46,6 +51,9 @@ function doPost(e) {
 
     // 2) 申込者への自動返信
     _sendToApplicant(d, receivedAt);
+
+    // 3) Slack通知（URL未設定時はスキップ。失敗してもフォーム全体を失敗させない）
+    _sendToSlack(d, receivedAt);
 
     // (任意) スプレッドシートに記録したい場合はここで追加
     // _appendToSheet(d, receivedAt);
@@ -166,6 +174,54 @@ function _sendToApplicant(d, receivedAt) {
     htmlBody: htmlBody,
     replyTo: REPLY_TO,
   });
+}
+
+// ========== Slack 通知 ==========
+function _sendToSlack(d, receivedAt) {
+  if (!SLACK_WEBHOOK_URL) return;  // 未設定時はスキップ
+  try {
+    const challenges = (d.challenges || '(未記入)').toString().slice(0, 1800);
+    const quotedChallenges = challenges.replace(/\n/g, '\n> ');
+    const payload = {
+      text: '【XiX 先行受付】新規申込: ' + (d.company || '-') + ' / ' + (d.name || '-') + '様',
+      blocks: [
+        {
+          type: 'header',
+          text: { type: 'plain_text', text: '🎉 XiX 先行受付 新規申込', emoji: true }
+        },
+        {
+          type: 'section',
+          fields: [
+            { type: 'mrkdwn', text: '*法人名:*\n' + (d.company || '-') },
+            { type: 'mrkdwn', text: '*ご担当者:*\n' + (d.name || '-') + (d.role ? ' / ' + d.role : '') },
+            { type: 'mrkdwn', text: '*メール:*\n' + (d.email || '-') },
+            { type: 'mrkdwn', text: '*電話:*\n' + (d.phone || '-') },
+            { type: 'mrkdwn', text: '*店舗数:*\n' + (d.stores || '-') },
+            { type: 'mrkdwn', text: '*P-Brain:*\n' + (d.pbrain || '-') }
+          ]
+        },
+        {
+          type: 'section',
+          text: { type: 'mrkdwn', text: '*課題:*\n> ' + quotedChallenges }
+        },
+        {
+          type: 'context',
+          elements: [
+            { type: 'mrkdwn', text: '🕒 受付日時: ' + receivedAt }
+          ]
+        }
+      ]
+    };
+    UrlFetchApp.fetch(SLACK_WEBHOOK_URL, {
+      method: 'post',
+      contentType: 'application/json',
+      payload: JSON.stringify(payload),
+      muteHttpExceptions: true
+    });
+  } catch (e) {
+    console.error('slack notify failed', e);
+    // Slack失敗でもメール送信済みなのでユーザーには成功扱い
+  }
 }
 
 // ========== ユーティリティ ==========
