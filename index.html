@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XiX（ザイクス） ｜ パチンコホールのイベント情報を制する SaaS ｜ 2026/4/25 先行受付開始</title>
+  <meta name="description" content="イベント情報を制する者が、ホールを制する。新台・取材・ライター来店・景品イベントを自動収集し、P-Brain連動で「競合補正」された効果測定を実現。3,000名のゲストDB／1,500種の取材DBを搭載。先行受付は2026年4月25日より。">
+  <meta property="og:title" content="イベント情報を制する者が、ホールを制する。— XiX 2026.04.25 先行受付開始">
+  <meta property="og:description" content="パチンコホール特化のイベントインテリジェンス XiX（ザイクス）。先行受付は2026年4月25日スタート。">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <svg class="nav-logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" rx="8" fill="url(#logo-gradient)"/>
+          <path d="M10 14L16 26L20 18L24 26L30 14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs>
+            <linearGradient id="logo-gradient" x1="0" y1="0" x2="40" y2="40">
+              <stop offset="0%" stop-color="#6366f1"/>
+              <stop offset="100%" stop-color="#8b5cf6"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="nav-logo-text">XiX</span>
+      </a>
+      <div class="nav-links">
+        <a href="#problem" class="nav-link">課題</a>
+        <a href="#features" class="nav-link">6つの機能</a>
+        <a href="#comparison" class="nav-link">導入効果</a>
+        <a href="#roadmap" class="nav-link">ロードマップ</a>
+        <a href="#cta-section" class="nav-link nav-link-cta">先行受付</a>
+      </div>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="メニュー">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <!-- Mobile Menu -->
+    <div class="nav-mobile" id="nav-mobile">
+      <a href="#problem" class="nav-mobile-link">課題</a>
+      <a href="#features" class="nav-mobile-link">6つの機能</a>
+      <a href="#comparison" class="nav-mobile-link">導入効果</a>
+      <a href="#roadmap" class="nav-mobile-link">ロードマップ</a>
+      <a href="#cta-section" class="nav-mobile-link nav-link-cta">先行受付</a>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-glow hero-glow-1"></div>
+    <div class="hero-glow hero-glow-2"></div>
+
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          <span>2026.04.25（金） 先行受付開始</span>
+        </div>
+        <h1 class="hero-title">
+          <span class="hero-title-accent">イベント情報</span>を制する者が、<br>
+          ホールを制する。
+        </h1>
+        <p class="hero-subtitle">
+          新台入替・取材・ライター来店・景品イベント──<br class="hide-sp">
+          あらゆるイベント情報をインターネット上から自動取得し、<br class="hide-sp">
+          自店も競合店も、同じカレンダーで俯瞰する。<br class="hide-sp">
+          パチンコホール特化のイベントインテリジェンス <b>XiX（ザイクス）</b>。
+        </p>
+        <div class="hero-cta-group">
+          <a href="#cta-section" class="btn btn-primary">
+            <span>先行受付に申し込む</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#features" class="btn btn-secondary">機能を見る</a>
+        </div>
+        <div class="hero-trust">
+          <span class="hero-trust-text"><b>P-Brain 公式連動</b>｜ゲストDB <b>3,000名</b>｜取材DB <b>1,500種</b></span>
+        </div>
+      </div>
+
+      <div class="hero-chart">
+        <div class="hero-chart-card">
+          <div class="hero-chart-header">
+            <span class="hero-chart-title">イベント情報 自動収集トレンド</span>
+            <span class="hero-chart-badge">Live</span>
+          </div>
+          <svg class="hero-chart-svg" id="hero-chart-svg" viewBox="0 0 500 200" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="chart-gradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#6366f1" stop-opacity="0.3"/>
+                <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
+              </linearGradient>
+              <linearGradient id="line-gradient" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#6366f1"/>
+                <stop offset="100%" stop-color="#8b5cf6"/>
+              </linearGradient>
+            </defs>
+            <path id="chart-area" fill="url(#chart-gradient)" opacity="0.6"/>
+            <path id="chart-line" fill="none" stroke="url(#line-gradient)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Animated dot -->
+            <circle id="chart-dot" r="4" fill="#8b5cf6" opacity="0">
+              <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
+            </circle>
+          </svg>
+          <div class="hero-chart-stats">
+            <div class="hero-chart-stat">
+              <span class="hero-chart-stat-value" id="hero-stat-today">+142</span>
+              <span class="hero-chart-stat-label">本日の新着イベント</span>
+            </div>
+            <div class="hero-chart-stat">
+              <span class="hero-chart-stat-value hero-chart-stat-up">24h 自動</span>
+              <span class="hero-chart-stat-label">更新頻度</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating mini cards -->
+        <div class="hero-float-card hero-float-card-1" id="float-card-1">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L12.09 7.26L18 8.27L14 12.14L14.18 18.02L10 15.77L5.82 18.02L6 12.14L2 8.27L7.91 7.26L10 2Z" fill="#f59e0b"/></svg>
+          <div>
+            <span class="float-card-title">競合店イベント検出</span>
+            <span class="float-card-desc">SSゲスト×取材 3件</span>
+          </div>
+        </div>
+        <div class="hero-float-card hero-float-card-2" id="float-card-2">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M17 10C17 13.866 13.866 17 10 17C6.134 17 3 13.866 3 10C3 6.134 6.134 3 10 3C13.866 3 17 6.134 17 10Z" stroke="#10b981" stroke-width="1.5"/><path d="M7 10L9 12L13 8" stroke="#10b981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div>
+            <span class="float-card-title">P-Brain 連動中</span>
+            <span class="float-card-desc">H/C × Event 並列表示</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TICKER ========== -->
+  <section class="ticker" id="ticker">
+    <div class="ticker-label">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M8 2v12" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round"/></svg>
+      EVENT LIVE
+    </div>
+    <div class="ticker-track">
+      <div class="ticker-content" id="ticker-content">
+        <!-- Duplicated in JS for infinite scroll -->
+        <div class="ticker-item"><span class="ticker-rank">LIVE</span><span class="ticker-name">新台入替 自動検出</span><span class="ticker-count">24h 更新</span></div>
+        <div class="ticker-item"><span class="ticker-rank">LIVE</span><span class="ticker-name">SSゲスト来店告知</span><span class="ticker-count">競合店含む</span></div>
+        <div class="ticker-item"><span class="ticker-rank">LIVE</span><span class="ticker-name">取材イベント収集</span><span class="ticker-count">1,500種 DB</span></div>
+        <div class="ticker-item"><span class="ticker-rank">LIVE</span><span class="ticker-name">ライター来店アラート</span><span class="ticker-count">影響力スコア付</span></div>
+        <div class="ticker-item"><span class="ticker-rank">LIVE</span><span class="ticker-name">景品イベント取得</span><span class="ticker-count">X/YouTube/公式</span></div>
+        <div class="ticker-item"><span class="ticker-rank">LIVE</span><span class="ticker-name">YouTube動画マッチング</span><span class="ticker-count">機種×日別</span></div>
+        <div class="ticker-item"><span class="ticker-rank">LIVE</span><span class="ticker-name">P-Brain H/C連動</span><span class="ticker-count">商圏補正済</span></div>
+        <div class="ticker-item"><span class="ticker-rank">LIVE</span><span class="ticker-name">グランドオープン通知</span><span class="ticker-count">自動カレンダー</span></div>
+        <div class="ticker-item"><span class="ticker-rank">LIVE</span><span class="ticker-name">リニューアルオープン</span><span class="ticker-count">全国対応</span></div>
+        <div class="ticker-item"><span class="ticker-rank">LIVE</span><span class="ticker-name">周年・特定日イベント</span><span class="ticker-count">自動分類</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PROBLEM ========== -->
+  <section class="problem" id="problem">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Problem</span>
+        <h2 class="section-title">その"イベントの振り返り"、<br class="hide-pc">本当に正しいですか？</h2>
+        <p class="section-desc">1つでもチェックが付いたら、XiXが解決します。</p>
+      </div>
+      <ul class="problem-list">
+        <li><span class="problem-check">✓</span>自店のイベント評価を、<b>競合の仕掛けを考慮せず</b>に見ている</li>
+        <li><span class="problem-check">✓</span>SNSを毎朝見て、競合店や取材情報を<b>手作業で集計</b>している</li>
+        <li><span class="problem-check">✓</span>ライターの集客力を、<b>感覚</b>でしか評価できていない</li>
+        <li><span class="problem-check">✓</span>YouTubeで話題の機種を<b>追いきれていない</b></li>
+        <li><span class="problem-check">✓</span>ゲスト・取材の選定が、<b>"これまで通り"で止まっている</b></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ========== FEATURES ========== -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Features</span>
+        <h2 class="section-title">XiXが変える、<br class="hide-pc">6つの現場</h2>
+        <p class="section-desc">新台・取材・ライター来店・景品イベント──<br class="hide-sp">パチンコホール経営に必要な"情報の視界"を、XiXはまるごと変えます。</p>
+      </div>
+
+      <div class="features-grid features-grid-6">
+        <!-- Feature 1: イベント自動取得 -->
+        <div class="feature-card" data-feature="calendar">
+          <div class="feature-card-glow"></div>
+          <div class="feature-num">01</div>
+          <div class="feature-icon">
+            <svg viewBox="0 0 48 48" fill="none">
+              <rect x="6" y="10" width="36" height="32" rx="4" stroke="url(#feat1)" stroke-width="2"/>
+              <path d="M6 18H42" stroke="url(#feat1)" stroke-width="2"/>
+              <path d="M16 6V14M32 6V14" stroke="url(#feat1)" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="16" cy="26" r="2" fill="url(#feat1)"/>
+              <circle cx="24" cy="26" r="2" fill="url(#feat1)"/>
+              <circle cx="32" cy="26" r="2" fill="url(#feat1)"/>
+              <circle cx="16" cy="34" r="2" fill="url(#feat1)"/>
+              <defs><linearGradient id="feat1" x1="6" y1="6" x2="42" y2="42"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs>
+            </svg>
+          </div>
+          <h3 class="feature-title">イベントデータが、自動で整う</h3>
+          <p class="feature-desc">X（旧Twitter）・YouTube・公式サイトから、<b>新台入替／取材／ライター来店／景品イベント</b>を24時間自動収集。自店も競合店も、同じカレンダー上で時系列に整列します。"毎朝SNSを開いて集計する"業務は、もう不要です。</p>
+          <div class="feature-tags">
+            <span class="feature-tag">24h 自動</span>
+            <span class="feature-tag">自店×競合 併記</span>
+            <span class="feature-tag">時系列整列</span>
+          </div>
+          <figure class="feature-shot">
+            <img src="screenshots/xix-01-calendar.png" alt="XiX イベントカレンダー（自店14件／競合59件を同一カレンダーで表示）" loading="lazy">
+            <figcaption>XiX イベントカレンダー｜自店 × 競合店 を同一画面で俯瞰（実画面）</figcaption>
+          </figure>
+        </div>
+
+        <!-- Feature 2: 人的コスト削減 -->
+        <div class="feature-card" data-feature="cost">
+          <div class="feature-card-glow"></div>
+          <div class="feature-num">02</div>
+          <div class="feature-icon">
+            <svg viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="18" stroke="url(#feat2)" stroke-width="2"/>
+              <path d="M24 14V24L31 28" stroke="url(#feat2)" stroke-width="2" stroke-linecap="round"/>
+              <defs><linearGradient id="feat2" x1="6" y1="6" x2="42" y2="42"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs>
+            </svg>
+          </div>
+          <h3 class="feature-title">人的コストを、別の価値に変える</h3>
+          <p class="feature-desc">SNSの巡回・書き起こし・エクセル転記に費やしていた時間を、<b>スタッフ教育・接客・企画立案</b>へ。毎朝の"情報収集"はXiXが寝ている間に終わらせます。集計業務から解放された時間は、現場を前に進める時間に変わります。</p>
+          <div class="feature-tags">
+            <span class="feature-tag">集計業務ゼロ</span>
+            <span class="feature-tag">本業に集中</span>
+            <span class="feature-tag">属人化排除</span>
+          </div>
+          <div class="time-shift">
+            <div class="time-shift-row time-shift-before">
+              <span class="time-shift-label">BEFORE</span>
+              <div class="time-shift-bar">
+                <span class="tsb-seg tsb-seg-waste" style="width: 100%;">情報収集・転記・集計（手作業）</span>
+              </div>
+            </div>
+            <div class="time-shift-arrow">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                <path d="M14 4V24M14 24L7 17M14 24L21 17" stroke="url(#ts-grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <defs><linearGradient id="ts-grad" x1="0" y1="0" x2="28" y2="28"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs>
+              </svg>
+              <span>XiXで自動化</span>
+            </div>
+            <div class="time-shift-row time-shift-after">
+              <span class="time-shift-label">AFTER</span>
+              <div class="time-shift-bar">
+                <span class="tsb-seg tsb-seg-teach" style="width: 35%;">スタッフ教育</span>
+                <span class="tsb-seg tsb-seg-serve" style="width: 30%;">接客強化</span>
+                <span class="tsb-seg tsb-seg-plan" style="width: 35%;">企画立案</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 3: P-Brain連動 -->
+        <div class="feature-card feature-card-featured" data-feature="pbrain">
+          <div class="feature-card-glow"></div>
+          <div class="feature-num">03</div>
+          <div class="feature-badge-hot">MOST IMPACT</div>
+          <div class="feature-icon">
+            <svg viewBox="0 0 48 48" fill="none">
+              <path d="M24 6C14 6 8 14 8 22C8 28 12 32 12 36C12 40 15 42 18 42H30C33 42 36 40 36 36C36 32 40 28 40 22C40 14 34 6 24 6Z" stroke="url(#feat3)" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M18 20L24 26L30 20" stroke="url(#feat3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs><linearGradient id="feat3" x1="8" y1="6" x2="40" y2="42"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs>
+            </svg>
+          </div>
+          <h3 class="feature-title">"競合補正"された、正しい効果測定</h3>
+          <p class="feature-desc">自店だけ見て「良かった／悪かった」は、もう終わりです。<b>競合店のその日の仕掛けの難易度</b>を考慮しなければ、イベント評価はブレ続けます。XiX のイベント情報を姉妹プロダクト <b>P-Brain</b> の商圏日別実績と連動させることで、<b>H/Cデータ・商圏データと並列でイベントを可視化</b>。アイコン／金額表示／ポップアップで「いつ・どこで・どんなイベントが、競合と比べてどうだったか」が一目で分かります。</p>
+          <p class="feature-note">※ この画面は <b>P-Brain 側の分析ビュー</b>です。XiX 単体では提供していない機能で、<b>P-Brain との連動によってのみ</b>ご利用いただけます。</p>
+          <div class="feature-tags">
+            <span class="feature-tag">P-Brain 連動時のみ</span>
+            <span class="feature-tag">商圏補正</span>
+            <span class="feature-tag">H/C × 客数 × Event 並列</span>
+          </div>
+          <figure class="feature-shot">
+            <img src="screenshots/xix-07-pbrain-linkage.png" alt="P-Brain 分析画面｜商圏全体の日別客数・前月比に XiXイベント情報を重ねて並列表示" loading="lazy">
+            <figcaption><b>P-Brain 分析画面</b>（商圏×客数×XiXイベント併記）｜XiX単体では実現できず、<b>P-Brainと連動して初めて成立する</b>ビューです</figcaption>
+          </figure>
+        </div>
+
+        <!-- Feature 4: YouTube動画分析 -->
+        <div class="feature-card" data-feature="video">
+          <div class="feature-card-glow"></div>
+          <div class="feature-num">04</div>
+          <div class="feature-icon">
+            <svg viewBox="0 0 48 48" fill="none">
+              <rect x="4" y="8" width="40" height="32" rx="4" stroke="url(#feat4)" stroke-width="2"/>
+              <path d="M20 18V30L32 24L20 18Z" fill="url(#feat4)"/>
+              <defs><linearGradient id="feat4" x1="4" y1="8" x2="44" y2="40"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs>
+            </svg>
+          </div>
+          <h3 class="feature-title">YouTubeの"期待値"を、機種別・日別に</h3>
+          <p class="feature-desc">毎日追加されるパチンコ関連のYouTube動画を<b>自動取得→機種マッチング</b>。日別の機種別再生数をグラフ化し、<b>ユーザーの期待値の推移</b>を可視化。「今、どの機種に空気が向いているのか」を勘ではなく数値で掴めます。</p>
+          <div class="feature-tags">
+            <span class="feature-tag">機種マッチング</span>
+            <span class="feature-tag">影響力チャンネル判定</span>
+            <span class="feature-tag">時系列分析</span>
+          </div>
+          <figure class="feature-shot">
+            <img src="screenshots/xix-04-video-analytics.png" alt="XiX 動画分析 機種別再生数推移（総動画10,727件／アクティブ796ch／バズ25機種）" loading="lazy">
+            <figcaption>動画分析 × 機種別再生数推移｜日別の期待値の動きを時系列で可視化（実画面）</figcaption>
+          </figure>
+          <figure class="feature-shot">
+            <img src="screenshots/xix-video-machine-ranking.png" alt="XiX 動画分析 機種ランキングTOP10（L/ミリオンゴッド、L/黄門ちゃま A1、eリコリス・リコイル M3 他）" loading="lazy">
+            <figcaption>機種ランキング TOP10｜再生回数と動画数でバズ機種を自動抽出（実画面）</figcaption>
+          </figure>
+        </div>
+
+        <!-- Feature 5: ゲスト×取材DB -->
+        <div class="feature-card" data-feature="guest">
+          <div class="feature-card-glow"></div>
+          <div class="feature-num">05</div>
+          <div class="feature-icon">
+            <svg viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="16" r="8" stroke="url(#feat5)" stroke-width="2"/>
+              <path d="M8 42C8 33.163 15.163 26 24 26C32.837 26 40 33.163 40 42" stroke="url(#feat5)" stroke-width="2" stroke-linecap="round"/>
+              <defs><linearGradient id="feat5" x1="8" y1="8" x2="40" y2="42"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs>
+            </svg>
+          </div>
+          <h3 class="feature-title">3,000ゲスト × 1,500取材 の、業界最大級DB</h3>
+          <p class="feature-desc">約 <b>3,000名の来店ゲスト</b> と <b>1,500種類の取材リスト</b> をデータベース化。各ゲスト・取材の<b>集客ポテンシャルをスコア化</b>し、あなたの店舗・立地・ターゲット層に合致する人選を提案します。</p>
+          <figure class="feature-shot">
+            <img src="screenshots/xix-05-guest-analytics.png" alt="XiX 来店ゲスト分析（3,009名登録／SS:3人・S:2人・A:7人・B:40人・C:47人・D:130人・E:2,778人／よしき・いそまる・やっちゃん・木村魚拓・れんじろう・松本バッチ）" loading="lazy">
+            <figcaption>来店ゲスト分析｜3,009名を7段階スコアで格付け、影響力を定量化（実画面）</figcaption>
+          </figure>
+          <figure class="feature-shot">
+            <img src="screenshots/xix-06-guest-detail-yoshiki.png" alt="XiX ゲスト個別詳細（よしき・SS 100.00pt／Xフォロワー 289,302／Youtube登録 1,910,000／X影響力54.73・YT影響力92.13）" loading="lazy">
+            <figcaption>ゲスト個別詳細｜X／YouTube別の影響力スコアを定量表示（実画面）</figcaption>
+          </figure>
+        </div>
+
+        <!-- Feature 6: 全国イベントデータ -->
+        <div class="feature-card" data-feature="national">
+          <div class="feature-card-glow"></div>
+          <div class="feature-num">06</div>
+          <div class="feature-badge-soon">Summer 2026</div>
+          <div class="feature-icon">
+            <svg viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="18" stroke="url(#feat6)" stroke-width="2"/>
+              <path d="M24 6C29 12 29 36 24 42M24 6C19 12 19 36 24 42M6 24H42" stroke="url(#feat6)" stroke-width="2"/>
+              <defs><linearGradient id="feat6" x1="6" y1="6" x2="42" y2="42"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs>
+            </svg>
+          </div>
+          <h3 class="feature-title">この夏、業界の"標準指標"をつくる</h3>
+          <p class="feature-desc">全国店舗のイベント実施データを集約し、<b>ゲスト別・取材別の"送客リフト"ベンチマーク</b>を公開予定（2026年夏）。自店のゲスト選定が「全国平均と比べて効いているのか」を、業界で初めて定量比較できるようになります。</p>
+          <div class="feature-tags">
+            <span class="feature-tag">Coming Summer 2026</span>
+            <span class="feature-tag">契約ユーザー早期アクセス</span>
+          </div>
+          <div class="benchmark-viz">
+            <div class="benchmark-head">
+              <span class="benchmark-title">送客リフト ベンチマーク（例）</span>
+              <span class="benchmark-badge">Preview｜夏公開</span>
+            </div>
+            <div class="benchmark-rows">
+              <div class="benchmark-row">
+                <span class="bm-label">SS級ゲストA</span>
+                <div class="bm-bar">
+                  <span class="bm-bar-fill bm-bar-self" style="width: 88%;"></span>
+                  <span class="bm-bar-avg" style="left: 72%;" title="全国平均"></span>
+                </div>
+                <span class="bm-value">+32<small>%</small></span>
+              </div>
+              <div class="benchmark-row">
+                <span class="bm-label">S級取材B</span>
+                <div class="bm-bar">
+                  <span class="bm-bar-fill bm-bar-self" style="width: 54%;"></span>
+                  <span class="bm-bar-avg" style="left: 65%;" title="全国平均"></span>
+                </div>
+                <span class="bm-value bm-value-low">−18<small>%</small></span>
+              </div>
+              <div class="benchmark-row">
+                <span class="bm-label">A級ゲストC</span>
+                <div class="bm-bar">
+                  <span class="bm-bar-fill bm-bar-self" style="width: 70%;"></span>
+                  <span class="bm-bar-avg" style="left: 58%;" title="全国平均"></span>
+                </div>
+                <span class="bm-value">+12<small>%</small></span>
+              </div>
+            </div>
+            <div class="benchmark-legend">
+              <span class="bm-legend-item"><span class="bm-dot bm-dot-self"></span>自店のリフト率</span>
+              <span class="bm-legend-item"><span class="bm-dot bm-dot-avg"></span>全国平均</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== BEFORE/AFTER ========== -->
+  <section class="comparison" id="comparison">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Before / After</span>
+        <h2 class="section-title">勘から、データへ</h2>
+        <p class="section-desc">XiX導入で営業判断の質が劇的に変化します。</p>
+      </div>
+
+      <div class="comparison-grid">
+        <div class="comparison-card comparison-before">
+          <div class="comparison-label">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#ef4444" stroke-width="1.5"/><path d="M7 7L13 13M13 7L7 13" stroke="#ef4444" stroke-width="1.5" stroke-linecap="round"/></svg>
+            導入前
+          </div>
+          <ul class="comparison-list">
+            <li>
+              <span class="comparison-icon comparison-icon-bad">?</span>
+              <div>
+                <strong>イベント情報は手作業で収集</strong>
+                <p>毎朝SNSを巡回してエクセル転記。本業に使う時間が削られる</p>
+              </div>
+            </li>
+            <li>
+              <span class="comparison-icon comparison-icon-bad">?</span>
+              <div>
+                <strong>競合の仕掛けを考慮せず評価</strong>
+                <p>自店のイベント評価が"競合補正"されず、判断がブレ続ける</p>
+              </div>
+            </li>
+            <li>
+              <span class="comparison-icon comparison-icon-bad">?</span>
+              <div>
+                <strong>ゲスト・取材の選定が感覚頼み</strong>
+                <p>「いつもの人選」「なんとなく効きそう」で決めている</p>
+              </div>
+            </li>
+            <li>
+              <span class="comparison-icon comparison-icon-bad">?</span>
+              <div>
+                <strong>YouTube期待値の動きが見えない</strong>
+                <p>どの機種に空気が向いているかを勘でしか掴めない</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="comparison-divider">
+          <div class="comparison-divider-line"></div>
+          <div class="comparison-divider-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="url(#divider-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="divider-grad" x1="5" y1="12" x2="19" y2="12"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs></svg>
+          </div>
+          <div class="comparison-divider-line"></div>
+        </div>
+
+        <div class="comparison-card comparison-after">
+          <div class="comparison-label">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#10b981" stroke-width="1.5"/><path d="M7 10L9 12L13 8" stroke="#10b981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            導入後
+          </div>
+          <ul class="comparison-list">
+            <li>
+              <span class="comparison-icon comparison-icon-good">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 5" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <div>
+                <strong>イベント情報は自動で整う</strong>
+                <p>SNS・公式サイトから24時間自動収集、カレンダーに自動反映</p>
+              </div>
+            </li>
+            <li>
+              <span class="comparison-icon comparison-icon-good">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 5" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <div>
+                <strong>"競合補正"された正しい効果測定</strong>
+                <p>P-BrainのH/C・商圏データと並列表示、競合仕掛け難易度を織り込む</p>
+              </div>
+            </li>
+            <li>
+              <span class="comparison-icon comparison-icon-good">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 5" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <div>
+                <strong>DBに基づくゲスト・取材選定</strong>
+                <p>3,000ゲスト・1,500取材のスコア化で、集客ポテンシャルを定量比較</p>
+              </div>
+            </li>
+            <li>
+              <span class="comparison-icon comparison-icon-good">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 5" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <div>
+                <strong>YouTube期待値を先読み</strong>
+                <p>機種別・日別の再生数推移で、ユーザー期待値の動きを可視化</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== NUMBERS ========== -->
+  <section class="numbers" id="numbers">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Database</span>
+        <h2 class="section-title">業界最大級の<br class="hide-pc">ゲスト × 取材 データベース</h2>
+        <p class="section-desc">"誰を呼べば効くか"に、データで答える。</p>
+      </div>
+
+      <div class="numbers-grid numbers-grid-2">
+        <div class="number-card" data-count="3000" data-suffix="名">
+          <div class="number-icon">
+            <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="11" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M6 28C6 22.477 10.477 18 16 18C21.523 18 26 22.477 26 28" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="number-value">
+            <span class="number-count" id="count-guests">0</span>
+            <span class="number-suffix">名</span>
+          </div>
+          <span class="number-label">来店ゲストDB（SS〜Eの7段階スコア）</span>
+          <div class="number-bar"><div class="number-bar-fill" style="--bar-width: 90%;"></div></div>
+        </div>
+
+        <div class="number-card" data-count="1500" data-suffix="種">
+          <div class="number-icon">
+            <svg viewBox="0 0 32 32" fill="none"><rect x="5" y="5" width="22" height="22" rx="4" stroke="currentColor" stroke-width="1.5"/><path d="M10 11H22M10 16H22M10 21H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="number-value">
+            <span class="number-count" id="count-reporters">0</span>
+            <span class="number-suffix">種</span>
+          </div>
+          <span class="number-label">取材リストDB（集客ポテンシャル付）</span>
+          <div class="number-bar"><div class="number-bar-fill" style="--bar-width: 75%;"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TRUST ========== -->
+  <section class="trust" id="trust">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Trust</span>
+        <h2 class="section-title">"作っている会社"と、<br class="hide-pc">"繋がる先"を見てください</h2>
+      </div>
+      <div class="trust-grid">
+        <div class="trust-card">
+          <div class="trust-icon">
+            <svg viewBox="0 0 48 48" fill="none"><path d="M6 40V20L24 8L42 20V40H6Z" stroke="url(#trust1)" stroke-width="2" stroke-linejoin="round"/><path d="M18 40V26H30V40" stroke="url(#trust1)" stroke-width="2" stroke-linejoin="round"/><defs><linearGradient id="trust1" x1="6" y1="8" x2="42" y2="40"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs></svg>
+          </div>
+          <h3>現場を知る会社が、作っている</h3>
+          <p>開発元は <b>株式会社頓智WORKS</b>（代表 寺澤尚己／パチンコ業界20年）。P-Brain 受託開発の実績を持つ、業界をわかった会社のプロダクトです。</p>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon">
+            <svg viewBox="0 0 48 48" fill="none"><path d="M24 6C14 6 8 14 8 22C8 28 12 32 12 36C12 40 15 42 18 42H30C33 42 36 40 36 36C36 32 40 28 40 22C40 14 34 6 24 6Z" stroke="url(#trust2)" stroke-width="2" stroke-linejoin="round"/><defs><linearGradient id="trust2" x1="8" y1="6" x2="40" y2="42"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs></svg>
+          </div>
+          <h3>P-Brain と、ネイティブ連動</h3>
+          <p>パチンコ業界の定番 <b>P-Brain</b> と公式連動。H/C・商圏・実績データと同画面で並列比較し、"競合補正"された正しい効果測定を実現します。</p>
+        </div>
+      </div>
+
+      <!-- Screenshot slider -->
+      <p class="trust-slider-lead">"もう動いているプロダクト"です。主要画面をご覧ください。</p>
+      <div class="trust-slider">
+        <figure>
+          <img src="screenshots/xix-01-calendar.png" alt="イベントカレンダー" loading="lazy">
+          <figcaption>① イベントカレンダー</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/xix-02-calendar-event-detail.png" alt="イベント詳細ポップアップ" loading="lazy">
+          <figcaption>② イベント詳細（景品／画像付）</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/xix-07-pbrain-linkage.png" alt="P-Brain 分析画面（XiX連動時）" loading="lazy">
+          <figcaption>③ <b>P-Brain 分析画面</b>（XiX 連動時のみ表示）</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/xix-04-video-analytics.png" alt="動画分析 機種別再生数推移" loading="lazy">
+          <figcaption>④ 動画分析 × 機種別推移</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/xix-05-guest-analytics.png" alt="来店ゲスト分析" loading="lazy">
+          <figcaption>⑤ 来店ゲスト分析</figcaption>
+        </figure>
+        <figure>
+          <img src="screenshots/xix-06-guest-detail-yoshiki.png" alt="ゲスト個別詳細" loading="lazy">
+          <figcaption>⑥ ゲスト個別詳細</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ROADMAP ========== -->
+  <section class="roadmap" id="roadmap">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Roadmap</span>
+        <h2 class="section-title">これからのXiX</h2>
+        <p class="section-desc">先行受付から、段階的に機能を拡張していきます。</p>
+      </div>
+      <div class="roadmap-grid">
+        <div class="roadmap-item">
+          <div class="roadmap-phase">Phase 1</div>
+          <div class="roadmap-date">2026.04.25〜</div>
+          <h3>基盤機能リリース</h3>
+          <p>SNSデータ連携／イベントカレンダー／ライター情報管理／YouTube分析／P-Brain連動</p>
+        </div>
+        <div class="roadmap-item roadmap-item-highlight">
+          <div class="roadmap-phase">Phase 2</div>
+          <div class="roadmap-date">2026年夏〜</div>
+          <h3>全国イベントデータ公開</h3>
+          <p>ゲスト別・取材別の"送客リフト"ベンチマーク公開／AIによる日報自動作成／イベントROI可視化</p>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-phase">Phase 3</div>
+          <div class="roadmap-date">2026末〜</div>
+          <h3>AI提案＆効果予測</h3>
+          <p>AIがSNS投稿内容やイベントを自動提案。効果予測・感情分析・予算設定に基づき、経験の少ない担当者でも成果を出せるツールへ。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FAQ ========== -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">FAQ</span>
+        <h2 class="section-title">よくあるご質問</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>P-Brainを使っていないと導入できませんか？</summary>
+          <p><b>単体利用可能</b>です。ただし、P-Brainと連動させると③の"競合補正"効果測定が最大限活きます。</p>
+        </details>
+        <details class="faq-item">
+          <summary>対応店舗数の上限は？</summary>
+          <p>単店から大手チェーンまでスケール可能です。グループ・多店舗運営にも対応しています。</p>
+        </details>
+        <details class="faq-item">
+          <summary>導入までの期間は？</summary>
+          <p>先行受付者は<b>最短2週間</b>で利用開始いただけます。</p>
+        </details>
+        <details class="faq-item">
+          <summary>データ更新頻度は？</summary>
+          <p>SNS情報は<b>日次自動更新</b>。重要イベントは準リアルタイムで反映します。</p>
+        </details>
+        <details class="faq-item">
+          <summary>料金プランを教えてください</summary>
+          <p>先行受付者には店舗数連動プランで個別ご案内しています。お問い合わせください。</p>
+        </details>
+        <details class="faq-item">
+          <summary>既存の店舗管理システムとの連携は？</summary>
+          <p>P-Brain連動を標準サポートしています。他システムについてはご相談ください。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA ========== -->
+  <section class="cta-section" id="cta-section">
+    <div class="cta-glow"></div>
+    <div class="container">
+      <div class="cta-content">
+        <span class="section-tag">Early Access</span>
+        <h2 class="cta-title">先行受付枠、<br class="hide-pc">4月25日スタート。</h2>
+        <p class="cta-desc">先行受付の特典：<br>
+          ✓ 2026年夏"全国イベントデータ"への早期アクセス権<br>
+          ✓ 導入時の <b>初期設定サポート無償</b><br>
+          ✓ P-Brainユーザー向け <b>連動設定の優先実施</b>
+        </p>
+
+        <div class="cta-countdown" id="countdown">
+          <span class="cta-countdown-label">先行受付開始まで</span>
+          <div class="cta-countdown-timer">
+            <div class="cta-countdown-unit">
+              <span class="cta-countdown-num" id="countdown-days">--</span>
+              <span class="cta-countdown-text">日</span>
+            </div>
+            <span class="cta-countdown-sep">:</span>
+            <div class="cta-countdown-unit">
+              <span class="cta-countdown-num" id="countdown-hours">--</span>
+              <span class="cta-countdown-text">時間</span>
+            </div>
+            <span class="cta-countdown-sep">:</span>
+            <div class="cta-countdown-unit">
+              <span class="cta-countdown-num" id="countdown-minutes">--</span>
+              <span class="cta-countdown-text">分</span>
+            </div>
+            <span class="cta-countdown-sep">:</span>
+            <div class="cta-countdown-unit">
+              <span class="cta-countdown-num" id="countdown-seconds">--</span>
+              <span class="cta-countdown-text">秒</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-buttons">
+          <a href="mailto:info@tonchi.works?subject=XiX%E5%85%88%E8%A1%8C%E5%8F%97%E4%BB%98%E7%94%B3%E3%81%97%E8%BE%BC%E3%81%BF" class="btn btn-primary btn-lg">
+            <span>先行受付に申し込む</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="https://lin.ee/xaWMqdW" target="_blank" rel="noopener" class="btn btn-secondary btn-lg">LINEで相談する</a>
+        </div>
+        <p class="cta-note">※ 先行受付は先着順。定員に達し次第締切ります。お申し込み後、3営業日以内に担当よりご連絡いたします。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="#" class="footer-logo">
+            <svg class="nav-logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="40" height="40" rx="8" fill="url(#logo-gradient-f)"/>
+              <path d="M10 14L16 26L20 18L24 26L30 14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs>
+                <linearGradient id="logo-gradient-f" x1="0" y1="0" x2="40" y2="40">
+                  <stop offset="0%" stop-color="#6366f1"/>
+                  <stop offset="100%" stop-color="#8b5cf6"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <span>XiX</span>
+          </a>
+          <p class="footer-desc">パチンコホール特化のイベントインテリジェンス SaaS</p>
+          <p class="footer-desc" style="margin-top: 8px;">提供：株式会社頓智WORKS</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>プロダクト</h4>
+            <a href="#features">6つの機能</a>
+            <a href="#roadmap">ロードマップ</a>
+            <a href="#faq">FAQ</a>
+          </div>
+          <div class="footer-col">
+            <h4>お問い合わせ</h4>
+            <a href="mailto:info@tonchi.works">info@tonchi.works</a>
+            <a href="tel:03-6457-3737">03-6457-3737</a>
+            <a href="https://lin.ee/xaWMqdW" target="_blank" rel="noopener">LINE公式アカウント</a>
+          </div>
+          <div class="footer-col">
+            <h4>企業情報</h4>
+            <a href="https://www.tnc-works.com/" target="_blank" rel="noopener">株式会社頓智WORKS</a>
+            <a href="#">プライバシーポリシー</a>
+            <a href="#">利用規約</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 株式会社頓智WORKS. All rights reserved.</p>
+        <p class="footer-address">東京都新宿区大久保2-2-11 新宿太陽ビル 5F</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
