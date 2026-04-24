@@ -179,8 +179,8 @@
 
   function setupCounters() {
     const counterMap = {
-      'count-guests': 3000,
-      'count-reporters': 1500
+      'count-guests': 3009,
+      'count-reporters': 1575
     };
 
     const counterCards = document.querySelectorAll('.number-card');
