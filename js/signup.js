@@ -2,8 +2,7 @@
 (function () {
   'use strict';
 
-  // TODO: デプロイ後のGAS Web App URL をここに設定（将来差し替え）
-  const GAS_URL = 'https://script.google.com/macros/s/REPLACE_WITH_DEPLOYED_URL/exec';
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbzIZyV-rXGa72xjeaBTGvk30AQKBXTlnfrmXUW_OZ9d3RKcinng4gHQGA_pLmgINjvO8Q/exec';
 
   const form = document.getElementById('signup-form');
   const thanks = document.getElementById('signup-thanks');
