@@ -676,24 +676,28 @@
           ✓ P-Brainユーザー向け <b>連動設定の優先実施</b>
         </p>
 
-        <div class="capacity">
+        <div class="capacity" id="capacity">
           <div class="capacity-header">
             <span class="capacity-label">先行受付 申込状況</span>
-            <span class="capacity-badge">先着 50社 / 200店舗</span>
+            <span class="capacity-badge" id="cap-phase-badge">先着 50法人 / 200店舗</span>
           </div>
           <div class="capacity-rows">
             <div class="capacity-row">
               <span class="cap-name">法人数</span>
-              <div class="cap-bar"><span class="cap-bar-fill" style="--pct: 38%;"></span></div>
-              <span class="cap-value"><b>19</b> / 50 <small>法人</small></span>
+              <div class="cap-bar"><span class="cap-bar-fill" id="cap-bar-c" style="--pct: 38%;"></span></div>
+              <span class="cap-value"><b id="cap-current-c">19</b> / <span id="cap-total-c">50</span> <small>法人</small></span>
             </div>
             <div class="capacity-row">
               <span class="cap-name">店舗数</span>
-              <div class="cap-bar"><span class="cap-bar-fill" style="--pct: 71%;"></span></div>
-              <span class="cap-value"><b>142</b> / 200 <small>店舗</small></span>
+              <div class="cap-bar"><span class="cap-bar-fill" id="cap-bar-s" style="--pct: 71%;"></span></div>
+              <span class="cap-value"><b id="cap-current-s">142</b> / <span id="cap-total-s">200</span> <small>店舗</small></span>
             </div>
           </div>
-          <p class="capacity-note">※ 残り <b>31法人／58店舗</b>。上限到達次第、受付を終了します。</p>
+          <p class="capacity-note" id="cap-note">※ 上限到達次第、受付枠を順次拡大します。</p>
+          <div class="capacity-expanded-banner" id="cap-expanded" hidden>
+            <span class="ce-pulse"></span>
+            <span class="ce-text" id="cap-expanded-label">✨好評につき増枠中</span>
+          </div>
         </div>
 
         <div class="cta-live" id="cta-live" hidden>
@@ -787,9 +791,22 @@
               <defs><linearGradient id="th-g" x1="0" y1="0" x2="56" y2="56"><stop stop-color="#10b981"/><stop offset="1" stop-color="#6366f1"/></linearGradient></defs>
             </svg>
           </div>
-          <h3>お申込みを受け付けました</h3>
-          <p>自動返信メールをお送りしました。<br>担当者より3営業日以内にご連絡いたします。</p>
+          <h3 id="thanks-title">お申込みを受け付けました</h3>
+          <p id="thanks-body">自動返信メールをお送りしました。<br>担当者より3営業日以内にご連絡いたします。</p>
           <p class="thanks-note">メールが届かない場合は迷惑メールフォルダをご確認の上、<a href="mailto:info@tonchi.works">info@tonchi.works</a> までご連絡ください。</p>
+        </div>
+
+        <!-- ウェイティングリストモード（一次受付終了時に表示） -->
+        <div id="waitlist-intro" class="waitlist-intro" hidden>
+          <div class="wl-trophy">🎉</div>
+          <h3>一次受付 100法人・800店舗 達成。<br>ありがとうございました。</h3>
+          <p>多数のお申込みをいただき、心より御礼申し上げます。<br>
+          <b>二次受付の開始までしばらくお待ちください。</b><br>
+          ウェイティングリストにご登録いただいた方へ <b>登録順で優先的にご案内</b> いたします。</p>
+          <button type="button" class="btn btn-primary btn-lg" id="waitlist-show-btn">
+            <span>ウェイティングリストに登録する</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
         </div>
       </div>
     </div>

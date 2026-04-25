@@ -2433,3 +2433,70 @@ a {
   .cta-live-title { font-size: 17px; }
   .cta-live-sub { font-size: 11px; }
 }
+
+/* ============================================
+   増枠中バナー & ウェイティングリスト
+   ============================================ */
+.capacity-expanded-banner {
+  margin-top: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border-radius: 99px;
+  background: linear-gradient(135deg, rgba(245,158,11,0.18), rgba(99,102,241,0.18));
+  border: 1px solid rgba(245,158,11,0.5);
+  font-size: 13px;
+  font-weight: 700;
+  color: #fcd34d;
+  letter-spacing: 0.02em;
+}
+.ce-pulse {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #f59e0b;
+  box-shadow: 0 0 0 0 rgba(245,158,11,0.6);
+  animation: cta-live-pulse 1.6s ease-out infinite;
+}
+
+/* Waitlist intro block */
+.waitlist-intro {
+  max-width: 720px;
+  margin: 32px auto 0;
+  padding: 36px 28px;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(99,102,241,0.10), rgba(139,92,246,0.10));
+  border: 1px solid rgba(99,102,241,0.4);
+  border-radius: 18px;
+  box-shadow: 0 16px 48px rgba(99,102,241,0.18);
+}
+.waitlist-intro .wl-trophy {
+  font-size: 44px;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 0 16px rgba(245,158,11,0.5));
+}
+.waitlist-intro h3 {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.waitlist-intro p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.9;
+  margin-bottom: 24px;
+}
+.waitlist-intro p b { color: #a5b4fc; }
+.waitlist-intro .btn {
+  min-width: 280px;
+}
+
+@media (max-width: 600px) {
+  .waitlist-intro { padding: 28px 18px; }
+  .waitlist-intro h3 { font-size: 18px; }
+  .waitlist-intro p { font-size: 13px; }
+  .waitlist-intro .btn { width: 100%; min-width: 0; }
+}
