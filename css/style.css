@@ -2616,3 +2616,14 @@ a {
   .pbrain-title { font-size: 22px; }
   .pbrain-cta { flex-direction: column; align-items: flex-start; gap: 10px; }
 }
+
+/* Honeypot — 人間には完全に見えない */
+.sf-honeypot {
+  position: absolute;
+  left: -99999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}

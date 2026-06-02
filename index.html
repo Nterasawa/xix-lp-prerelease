@@ -788,6 +788,10 @@
         </div>
 
         <form id="signup-form" class="signup-form" novalidate>
+          <!-- Honeypot: 人間には見えない／bot は埋めがち。送信時にこれが入っているとサーバー側で拒否 -->
+          <div class="sf-honeypot" aria-hidden="true">
+            <label>ウェブサイトURL（記入不要）<input type="text" name="_honeypot" tabindex="-1" autocomplete="off"></label>
+          </div>
           <div class="sf-grid">
             <label class="sf-field sf-required">
               <span class="sf-label">法人名</span>
@@ -809,9 +813,9 @@
               <span class="sf-label">電話番号</span>
               <input name="phone" type="tel" required autocomplete="tel" placeholder="03-0000-0000">
             </label>
-            <label class="sf-field">
+            <label class="sf-field sf-required">
               <span class="sf-label">店舗数</span>
-              <input name="stores" type="text" inputmode="numeric" placeholder="例：5">
+              <input name="stores" type="text" inputmode="numeric" pattern="[0-9]{1,4}" required placeholder="例：5（半角数字のみ）" title="半角数字で店舗数を入力してください">
             </label>
             <label class="sf-field sf-full">
               <span class="sf-label">P-Brain 利用状況</span>

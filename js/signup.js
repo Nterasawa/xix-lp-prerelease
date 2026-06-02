@@ -5,6 +5,10 @@
 
   const GAS_URL = 'https://script.google.com/macros/s/AKfycbyoirIbRdCg-0AHsdmXk7Ntz5EexkIcLv0THeGq6ZTWwPedFuYZGnG5pjVPLjpF9CAHzg/exec';
 
+  // ページ読み込み時刻（早すぎる送信＝bot 判定に使用）
+  const PAGE_LOADED_AT = Date.now();
+  const MIN_FORM_AGE_MS = 3000;
+
   const form = document.getElementById('signup-form');
   const thanks = document.getElementById('signup-thanks');
   if (!form || !thanks) return;
@@ -136,6 +140,38 @@
       form.reportValidity();
       return;
     }
+
+    // bot対策1: honeypot が埋まっていたら無音で成功画面（リクエストは送らない）
+    const honeypotEl = form.querySelector('input[name="_honeypot"]');
+    if (honeypotEl && honeypotEl.value.trim().length > 0) {
+      form.hidden = true;
+      thanks.hidden = false;
+      thanks.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+
+    // bot対策2: フォーム表示から送信までが早すぎる場合は無音で成功画面
+    const elapsed = Date.now() - PAGE_LOADED_AT;
+    if (elapsed < MIN_FORM_AGE_MS) {
+      form.hidden = true;
+      thanks.hidden = false;
+      thanks.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+
+    // bot対策3: 店舗数が数字でない場合
+    const storesEl = form.querySelector('input[name="stores"]');
+    if (storesEl) {
+      const v = storesEl.value.trim();
+      if (!/^[0-9]{1,4}$/.test(v) || parseInt(v, 10) < 1) {
+        storesEl.focus();
+        storesEl.setCustomValidity('店舗数は半角数字（1〜9999）で入力してください');
+        storesEl.reportValidity();
+        setTimeout(() => storesEl.setCustomValidity(''), 100);
+        return;
+      }
+    }
+
     const data = serializeForm();
     if (GAS_URL.includes('REPLACE_WITH_DEPLOYED_URL')) {
       showError('フォームの送信先が未設定です（運用者にお知らせください）');

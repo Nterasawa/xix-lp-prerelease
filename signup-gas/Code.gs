@@ -112,6 +112,66 @@ function adminGetCounter() {
   console.log(_getState());
 }
 
+// ========== スパム判定 ==========
+// パチンコホール以外からのB2B営業・ボットを弾く。検知したらメール/Slack/カウンター
+// すべてスキップし、見た目だけ "ok: true" を返してスパマーに気づかせない。
+function _isSpam(d) {
+  // 1. Honeypot（人間には見えない隠しフィールドが埋まっている）
+  if (d._honeypot && String(d._honeypot).trim().length > 0) return 'honeypot';
+
+  // 2. 店舗数が数字以外、または範囲外（1〜9999）
+  var storesStr = String(d.stores || '').trim();
+  if (!/^[0-9]{1,4}$/.test(storesStr)) return 'stores-non-numeric';
+  if (parseInt(storesStr, 10) < 1) return 'stores-zero';
+
+  // 3. 法人名 / 担当者 / 役職 がランダム英数字8文字以上
+  var company = String(d.company || '');
+  var name = String(d.name || '');
+  var role = String(d.role || '');
+  if (/^[A-Za-z0-9]{8,}$/.test(company)) return 'random-company';
+  if (/^[A-Za-z0-9]{8,}$/.test(name)) return 'random-name';
+  if (role && /^[A-Za-z0-9]{8,}$/.test(role)) return 'random-role';
+
+  // 4. Gmail のドット細工ボット（local part にドット4個以上＋末尾数字）
+  var email = String(d.email || '').toLowerCase();
+  if (email.indexOf('@gmail.com') !== -1) {
+    var local = email.split('@')[0];
+    var dotCount = (local.match(/\./g) || []).length;
+    if (dotCount >= 4) return 'gmail-many-dots';
+  }
+
+  // 5. URL がいずれかのフィールドに含まれる
+  var urlRe = /https?:\/\//i;
+  if (urlRe.test(String(d.challenges || ''))) return 'url-in-challenges';
+  if (urlRe.test(company)) return 'url-in-company';
+  if (urlRe.test(role)) return 'url-in-role';
+
+  // 6. B2B営業ピッチキーワードが課題欄に含まれる
+  var challenges = String(d.challenges || '');
+  var pitch = [
+    // 自己紹介・営業文言
+    '弊社は','弊社では','弊社の','弊社が','弊社を',
+    'ご提案','お打ち合わせ','オンラインMTG',
+    'ご連絡いたしました','ご連絡差し上げ','ご検討の','よろしくお願い申し上げ',
+    'いただきたく','いただければ幸い','貴社の','経営者様',
+    // カレンダーリンク・予約サービス
+    'timerex.net','calendar.app.google','calendar.google.com','aitemasu.me',
+    // tnc-works スクレイピング由来（パチンコホール側はまず使わない）
+    'IoT','映像制作','クラウドアプリ','IT業界',
+    // 時間帯枠の典型パターン
+    '10:00～','11:00～','13:00～','14:00～',
+    '10:00ー','11:00ー','13:00ー','14:00ー',
+    '10:30～','10:30ー','11:00ｰ','13:00ｰ',
+    // よく出る営業ワード
+    '実績多数','成功事例','無料診断','スモールスタート'
+  ];
+  for (var i = 0; i < pitch.length; i++) {
+    if (challenges.indexOf(pitch[i]) !== -1) return 'pitch:' + pitch[i];
+  }
+
+  return null;
+}
+
 // ========== エンドポイント ==========
 function doPost(e) {
   try {
@@ -124,6 +184,14 @@ function doPost(e) {
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)) {
       return _json({ ok: false, error: 'メールアドレスの形式が正しくありません' });
+    }
+
+    // スパムチェック：通過した場合のみ実処理へ
+    const spamReason = _isSpam(d);
+    if (spamReason) {
+      console.log('SPAM blocked [' + spamReason + '] company=' + (d.company || '-') + ' email=' + (d.email || '-'));
+      // 静かに成功扱いを返す（スパマーには気づかせない）
+      return _json({ ok: true, state: _getState(), waitlist: false, _filtered: true });
     }
 
     const receivedAt = Utilities.formatDate(new Date(), 'Asia/Tokyo', 'yyyy/MM/dd HH:mm:ss');
