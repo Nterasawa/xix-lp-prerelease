@@ -112,64 +112,103 @@ function adminGetCounter() {
   console.log(_getState());
 }
 
-// ========== スパム判定 ==========
-// パチンコホール以外からのB2B営業・ボットを弾く。検知したらメール/Slack/カウンター
-// すべてスキップし、見た目だけ "ok: true" を返してスパマーに気づかせない。
-function _isSpam(d) {
-  // 1. Honeypot（人間には見えない隠しフィールドが埋まっている）
-  if (d._honeypot && String(d._honeypot).trim().length > 0) return 'honeypot';
+// ========== パチンコ業界キーワード（許可シグナル） ==========
+// 法人名／役職／課題 のいずれかにこれらが含まれれば「パチンコ関連」と判定。
+// ホール・代理店・メーカー・取材業者など、業界の人なら自然に出る語彙。
+var PACHINKO_TERMS = [
+  // 一般語
+  'パチンコ','ぱちんこ','パチスロ','ぱちすろ','スロット','スマスロ','スマパチ',
+  '遊技','遊戯','遊技場','遊技機','ホール','出玉','差枚','設定','新台','新台入替','入替',
+  '来店','取材','演者','ライター','旧イベ','特定日','等価','換金','稼働','客数','アウト',
+  '風営','風適法','パチ屋','P機','S機','甘デジ','ミドル','回胴','回胴式','遊技産業',
+  'パチンコ店','パチンコホール','スロット店','据え置き','高設定','設定示唆','機械割','機種',
+  'ジャグラー','番長','北斗','エヴァ','沖ドキ','まどマギ','押し順','天井','ボーナス',
+  // 媒体・取材・データ
+  'P-WORLD','Pワールド','ピーワールド','ぱちタウン','DMMぱちタウン','スロパチ','スロパチステーション',
+  'アツ姫','みんレポ','みんなのレポート','取材会社','演者来店','来店イベント','取材イベント',
+  // ホールチェーン
+  'マルハン','ダイナム','夢屋','ニラク','楽園','エスパス','日拓','ガイア','GAIA','キコーナ',
+  'ベガスベガス','123','延田','サンキョーレジャー','パラッツォ','デルパラ','アビバ','AVIVA',
+  'Dステーション','ステーション','NEXUS','やすだ','一六','オーギヤ','コンサートホール','ゾロ',
+  'モナコ','クリエ','アムテック','合田','ジャンジャン','ピーアーク','メッセ','プレゴ','AMS',
+  'ウイング','トーホー','ベルシティ','スーパーコスモ','タイホー','アイランド','フェイス','楽園',
+  // メーカー
+  'サンキョー','SANKYO','三洋','SANYO','京楽','KYORAKU','ニューギン','NEWGIN','大一','DAIICHI',
+  '藤商事','平和','HEIWA','オリンピア','サミー','Sammy','北電子','ユニバーサル','UNIVERSAL',
+  '大都','大都技研','DAITO','山佐','YAMASA','パイオニア','豊丸','西陣','タイヨーエレック',
+  'マルホン','ビスティ','Bisty','七匠','JFJ','浅間','エンターライズ','銀座','竹屋','大網',
+  'ニッタク','スパイキー','ロデオ','メーシー','ベルコ','大協','奥村','SNK','高砂','遊技機メーカー',
+  // システム・周辺機器・団体
+  'ダイコク電機','DAIKOKU','マースエンジニアリング','MARS','グローリー','ナスカ',
+  'ホールコンピュータ','ホルコン','日工組','日電協','全日遊連','景品','大景協',
+  // 自社・姉妹
+  'P-Brain','Pブレイン','ピーブレイン','XiX','ザイクス','pxix'
+];
 
-  // 2. 店舗数が数字以外、または範囲外（1〜9999）
+// ========== 非パチンコ営業キーワード（拒否シグナル） ==========
+// パチンコ業界の人がこのフォームに書くことはまず無い、売り込み専用の語彙。
+// ※ パチンコシグナルが1つでもあれば、こちらが出ても許可される（誤検知防止）。
+var OFFTARGET_TERMS = [
+  // tnc-works.com から自動取得した定型句（最強シグナル）
+  'IoT','映像制作','クラウドアプリ','クラウドアプリケーション','IT業界','情報通信業',
+  // 売り込みサービスカテゴリ（パチンコ業界向けでない一般B2B営業）
+  '採用サイト','求人媒体','中途採用','採用活動','採用コスト','採用ブランディング','人材採用',
+  'SEO','MEO','LLMO','AIO','CVR','UI/UX','ヒートマップ','ヒューリスティック',
+  'M&A','事業売却','事業譲渡','現金化','コールセンター','ポスティング','折込チラシ','折込広告',
+  '補助金','助成金','SNS運用代行','動画運用','ショート動画','ホームページ制作','Webサイト制作',
+  'サイトリニューアル','ハガキサイズ','デジタルマーケティング','Web集客','EC運用','ECサイト',
+  'オウンドメディア','コンテンツマーケティング','リスティング','広告運用代行','成果報酬',
+  'ゼロクリック','AI Overviews','ChatGPT','LLM','検索順位','被リンク','内部対策',
+  // 予約・日程調整リンク（コールド営業の定番）
+  'timerex','calendar.app.google','calendar.google.com','aitemasu.me','calendly','spirinc'
+];
+
+function _countHits(text, list) {
+  var hits = [];
+  for (var i = 0; i < list.length; i++) {
+    if (text.indexOf(list[i]) !== -1) hits.push(list[i]);
+  }
+  return hits;
+}
+
+// 入力を分類: 'block'（無音拒否） / 'review'（要確認フラグ付通知） / 'allow'（通常）
+function _classifyInquiry(d) {
+  // --- ① ボット系（無条件block） ---
+  if (d._honeypot && String(d._honeypot).trim().length > 0) return { action: 'block', reason: 'honeypot' };
+
   var storesStr = String(d.stores || '').trim();
-  if (!/^[0-9]{1,4}$/.test(storesStr)) return 'stores-non-numeric';
-  if (parseInt(storesStr, 10) < 1) return 'stores-zero';
+  if (!/^[0-9]{1,4}$/.test(storesStr) || parseInt(storesStr, 10) < 1) {
+    return { action: 'block', reason: 'stores-non-numeric' };
+  }
 
-  // 3. 法人名 / 担当者 / 役職 がランダム英数字8文字以上
   var company = String(d.company || '');
   var name = String(d.name || '');
   var role = String(d.role || '');
-  if (/^[A-Za-z0-9]{8,}$/.test(company)) return 'random-company';
-  if (/^[A-Za-z0-9]{8,}$/.test(name)) return 'random-name';
-  if (role && /^[A-Za-z0-9]{8,}$/.test(role)) return 'random-role';
+  if (/^[A-Za-z0-9]{8,}$/.test(company)) return { action: 'block', reason: 'random-company' };
+  if (/^[A-Za-z0-9]{8,}$/.test(name)) return { action: 'block', reason: 'random-name' };
+  if (role && /^[A-Za-z0-9]{8,}$/.test(role)) return { action: 'block', reason: 'random-role' };
 
-  // 4. Gmail のドット細工ボット（local part にドット4個以上＋末尾数字）
   var email = String(d.email || '').toLowerCase();
   if (email.indexOf('@gmail.com') !== -1) {
     var local = email.split('@')[0];
-    var dotCount = (local.match(/\./g) || []).length;
-    if (dotCount >= 4) return 'gmail-many-dots';
+    if ((local.match(/\./g) || []).length >= 4) return { action: 'block', reason: 'gmail-dots' };
   }
 
-  // 5. URL がいずれかのフィールドに含まれる
-  var urlRe = /https?:\/\//i;
-  if (urlRe.test(String(d.challenges || ''))) return 'url-in-challenges';
-  if (urlRe.test(company)) return 'url-in-company';
-  if (urlRe.test(role)) return 'url-in-role';
+  // --- ② パチンコ関連スコア vs 非パチンコ営業スコア ---
+  var allText = [company, name, role, String(d.challenges || '')].join(' \n ');
+  var pachiHits = _countHits(allText, PACHINKO_TERMS);
+  var offHits = _countHits(allText, OFFTARGET_TERMS);
 
-  // 6. B2B営業ピッチキーワードが課題欄に含まれる
-  var challenges = String(d.challenges || '');
-  var pitch = [
-    // 自己紹介・営業文言
-    '弊社は','弊社では','弊社の','弊社が','弊社を',
-    'ご提案','お打ち合わせ','オンラインMTG',
-    'ご連絡いたしました','ご連絡差し上げ','ご検討の','よろしくお願い申し上げ',
-    'いただきたく','いただければ幸い','貴社の','経営者様',
-    // カレンダーリンク・予約サービス
-    'timerex.net','calendar.app.google','calendar.google.com','aitemasu.me',
-    // tnc-works スクレイピング由来（パチンコホール側はまず使わない）
-    'IoT','映像制作','クラウドアプリ','IT業界',
-    // 時間帯枠の典型パターン
-    '10:00～','11:00～','13:00～','14:00～',
-    '10:00ー','11:00ー','13:00ー','14:00ー',
-    '10:30～','10:30ー','11:00ｰ','13:00ｰ',
-    // よく出る営業ワード
-    '実績多数','成功事例','無料診断','スモールスタート'
-  ];
-  for (var i = 0; i < pitch.length; i++) {
-    if (challenges.indexOf(pitch[i]) !== -1) return 'pitch:' + pitch[i];
+  // パチンコシグナルが1つでもあれば許可（「弊社」「お打ち合わせ」があってもOK）
+  if (pachiHits.length > 0) {
+    return { action: 'allow', reason: 'pachinko:' + pachiHits.slice(0, 3).join(',') };
   }
-
-  return null;
+  // パチンコシグナル無し かつ 非パチンコ営業シグナルあり → 無音拒否
+  if (offHits.length > 0) {
+    return { action: 'block', reason: 'offtarget:' + offHits.slice(0, 3).join(',') };
+  }
+  // どちらのシグナルも無い → 判定不能。安全側に倒し「要確認」で通知（弾かない）
+  return { action: 'review', reason: 'no-signal' };
 }
 
 // ========== エンドポイント ==========
@@ -186,20 +225,21 @@ function doPost(e) {
       return _json({ ok: false, error: 'メールアドレスの形式が正しくありません' });
     }
 
-    // スパムチェック：通過した場合のみ実処理へ
-    const spamReason = _isSpam(d);
-    if (spamReason) {
-      console.log('SPAM blocked [' + spamReason + '] company=' + (d.company || '-') + ' email=' + (d.email || '-'));
-      // 静かに成功扱いを返す（スパマーには気づかせない）
+    // 分類
+    const cls = _classifyInquiry(d);
+    if (cls.action === 'block') {
+      console.log('SPAM blocked [' + cls.reason + '] company=' + (d.company || '-') + ' email=' + (d.email || '-'));
+      // スパマーには気づかせず成功扱いを返す
       return _json({ ok: true, state: _getState(), waitlist: false, _filtered: true });
     }
+    const isReview = cls.action === 'review';
 
     const receivedAt = Utilities.formatDate(new Date(), 'Asia/Tokyo', 'yyyy/MM/dd HH:mm:ss');
     const isWaitlist = d.waitlist === true || d.waitlist === 'true';
 
-    // カウンター更新（ウェイティングリストはカウントに含めない）
+    // カウンター更新（ウェイティングリストと要確認はカウントに含めない）
     let stateAfter;
-    if (!isWaitlist) {
+    if (!isWaitlist && !isReview) {
       const addC = 1;
       const addS = parseInt(String(d.stores || '0').replace(/[^0-9]/g, ''), 10) || 0;
       _incrementState(addC, addS);
@@ -207,15 +247,15 @@ function doPost(e) {
     stateAfter = _getState();
 
     // 1) 店舗側への通知
-    _sendToNotify(d, receivedAt, isWaitlist, stateAfter);
+    _sendToNotify(d, receivedAt, isWaitlist, stateAfter, isReview, cls.reason);
 
-    // 2) 申込者への自動返信
+    // 2) 申込者への自動返信（要確認でも本人には通常どおり返信）
     _sendToApplicant(d, receivedAt, isWaitlist);
 
     // 3) Slack通知（URL未設定時はスキップ。失敗してもフォーム全体を失敗させない）
-    _sendToSlack(d, receivedAt, isWaitlist, stateAfter);
+    _sendToSlack(d, receivedAt, isWaitlist, stateAfter, isReview, cls.reason);
 
-    return _json({ ok: true, state: stateAfter, waitlist: isWaitlist });
+    return _json({ ok: true, state: stateAfter, waitlist: isWaitlist, review: isReview });
   } catch (err) {
     console.error(err);
     return _json({ ok: false, error: String(err && err.message || err) });
@@ -228,12 +268,16 @@ function doGet() {
 }
 
 // ========== メール送信 ==========
-function _sendToNotify(d, receivedAt, isWaitlist, state) {
-  const tag = isWaitlist ? '【XiX ウェイトリスト】' : '【XiX 先行受付】';
+function _sendToNotify(d, receivedAt, isWaitlist, state, isReview, clsReason) {
+  const tag = isReview ? '【XiX 要確認】' : (isWaitlist ? '【XiX ウェイトリスト】' : '【XiX 先行受付】');
   const subject = tag + '新規申込: ' + d.company + ' / ' + d.name + '様';
   const stateLine = state ? ('現在累計: ' + state.companies + '法人 / ' + state.stores + '店舗 申込済（フェーズ' + state.phase + '）') : '';
+  const reviewLine = isReview ? '⚠️ パチンコ業界関連か自動判定できませんでした（' + (clsReason || '') + '）。内容をご確認ください。カウンターには加算していません。' : '';
   const body = [
-    isWaitlist ? 'XiX ウェイティングリストに新規登録がありました。' : 'XiX 先行受付フォームから新規申込がありました。',
+    isReview ? '【要確認】XiX 先行受付フォームに、業界関連か判定できない申込がありました。' :
+    (isWaitlist ? 'XiX ウェイティングリストに新規登録がありました。' : 'XiX 先行受付フォームから新規申込がありました。'),
+    reviewLine ? '' : null,
+    reviewLine || null,
     '',
     '━━━━━━━━━━━━━━━━━━━',
     '■ 受付日時: ' + receivedAt,
@@ -345,15 +389,15 @@ function _sendToApplicant(d, receivedAt, isWaitlist) {
 }
 
 // ========== Slack 通知 ==========
-function _sendToSlack(d, receivedAt, isWaitlist, state) {
+function _sendToSlack(d, receivedAt, isWaitlist, state, isReview, clsReason) {
   if (!SLACK_WEBHOOK_URL) return;  // 未設定時はスキップ
   try {
     const challenges = (d.challenges || '(未記入)').toString().slice(0, 1800);
     const quotedChallenges = challenges.replace(/\n/g, '\n> ');
-    const headerText = isWaitlist
-      ? '⏳ XiX ウェイティングリスト 新規登録'
-      : '🎉 XiX 先行受付 新規申込';
-    const titleText = (isWaitlist ? '【XiX ウェイトリスト】' : '【XiX 先行受付】')
+    const headerText = isReview
+      ? '⚠️ XiX 要確認（業界関連か自動判定不可）'
+      : (isWaitlist ? '⏳ XiX ウェイティングリスト 新規登録' : '🎉 XiX 先行受付 新規申込');
+    const titleText = (isReview ? '【XiX 要確認】' : (isWaitlist ? '【XiX ウェイトリスト】' : '【XiX 先行受付】'))
       + '新規申込: ' + (d.company || '-') + ' / ' + (d.name || '-') + '様';
     const stateText = state
       ? '📊 累計: ' + state.companies + '法人 / ' + state.stores + '店舗 申込済（フェーズ' + state.phase + (state.label ? ' ' + state.label.replace(/^[\s✨]+/, '') : '') + '）'
@@ -383,7 +427,7 @@ function _sendToSlack(d, receivedAt, isWaitlist, state) {
         {
           type: 'context',
           elements: [
-            { type: 'mrkdwn', text: '🕒 受付日時: ' + receivedAt + (stateText ? '   ' + stateText : '') }
+            { type: 'mrkdwn', text: '🕒 受付日時: ' + receivedAt + (isReview ? '   ⚠️要確認（' + (clsReason || '') + '・カウント外）' : (stateText ? '   ' + stateText : '')) }
           ]
         }
       ]
