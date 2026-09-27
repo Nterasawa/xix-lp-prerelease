@@ -1,212 +1,55 @@
-/* 先行受付フォーム送信 — Google Apps Script Web App にPOSTして、
-   メール送信＋自動返信＋Slack通知＋カウンター更新をトリガー */
+// お問い合わせフォーム → 既存の Google Apps Script（先行受付フォームと同じ送信先・同じ項目名）
 (function () {
-  'use strict';
-
   const GAS_URL = 'https://script.google.com/macros/s/AKfycbyoirIbRdCg-0AHsdmXk7Ntz5EexkIcLv0THeGq6ZTWwPedFuYZGnG5pjVPLjpF9CAHzg/exec';
+  const MIN_FORM_AGE_MS = 4000;
+  const LOADED_AT = Date.now();
+  const form = document.getElementById('signupForm');
+  if (!form) return;
+  const btn = document.getElementById('submitBtn');
+  const err = document.getElementById('formError');
+  const thanks = document.getElementById('thanks');
 
-  // ページ読み込み時刻（早すぎる送信＝bot 判定に使用）
-  const PAGE_LOADED_AT = Date.now();
-  const MIN_FORM_AGE_MS = 3000;
+  const showError = msg => { err.textContent = msg; err.hidden = false; };
+  const setSending = on => { btn.disabled = on; btn.textContent = on ? '送信しています…' : '送信する'; };
+  const done = () => { form.hidden = true; thanks.hidden = false; thanks.focus(); thanks.scrollIntoView({ behavior: 'smooth', block: 'center' }); };
 
-  const form = document.getElementById('signup-form');
-  const thanks = document.getElementById('signup-thanks');
-  if (!form || !thanks) return;
-
-  const submitBtn = form.querySelector('.sf-submit');
-  const btnText = submitBtn.querySelector('.sf-btn-text');
-
-  // === Capacity / state UI elements ===
-  const capacityEl = document.getElementById('capacity');
-  const capPhaseBadge = document.getElementById('cap-phase-badge');
-  const capCurrentC = document.getElementById('cap-current-c');
-  const capCurrentS = document.getElementById('cap-current-s');
-  const capTotalC = document.getElementById('cap-total-c');
-  const capTotalS = document.getElementById('cap-total-s');
-  const capBarC = document.getElementById('cap-bar-c');
-  const capBarS = document.getElementById('cap-bar-s');
-  const capNote = document.getElementById('cap-note');
-  const capExpanded = document.getElementById('cap-expanded');
-  const capExpandedLabel = document.getElementById('cap-expanded-label');
-  const waitlistIntro = document.getElementById('waitlist-intro');
-  const waitlistShowBtn = document.getElementById('waitlist-show-btn');
-  const thanksTitle = document.getElementById('thanks-title');
-  const thanksBody = document.getElementById('thanks-body');
-
-  let isWaitlistMode = false;
-
-  // === State render ===
-  function renderState(state) {
-    if (!state) return;
-    if (capCurrentC) capCurrentC.textContent = (state.companies || 0).toLocaleString();
-    if (capCurrentS) capCurrentS.textContent = (state.stores || 0).toLocaleString();
-    if (capTotalC) capTotalC.textContent = (state.capC || 0).toLocaleString();
-    if (capTotalS) capTotalS.textContent = (state.capS || 0).toLocaleString();
-    if (capPhaseBadge) {
-      capPhaseBadge.textContent = '先着 ' + (state.capC || 0) + '法人 / ' + (state.capS || 0) + '店舗';
-    }
-    if (capBarC) {
-      const pct = Math.min(100, Math.round(((state.companies || 0) / (state.capC || 1)) * 100));
-      capBarC.style.setProperty('--pct', pct + '%');
-    }
-    if (capBarS) {
-      const pct = Math.min(100, Math.round(((state.stores || 0) / (state.capS || 1)) * 100));
-      capBarS.style.setProperty('--pct', pct + '%');
-    }
-
-    if (state.waitlist) {
-      // ウェイトリストモード: 申込状況・フォーム・サンクス を隠してウェイトリスト導入を表示
-      if (capacityEl) capacityEl.hidden = true;
-      form.hidden = true;
-      if (waitlistIntro) waitlistIntro.hidden = false;
-      isWaitlistMode = true;
-      // フォームボタン押下時の文言も用意
-      btnText.textContent = 'ウェイティングリストに登録する';
-    } else {
-      // 通常 or 増枠中
-      if (capacityEl) capacityEl.hidden = false;
-      if (waitlistIntro) waitlistIntro.hidden = true;
-      isWaitlistMode = false;
-
-      // 増枠バナー表示
-      if (state.label && capExpanded && capExpandedLabel) {
-        capExpandedLabel.textContent = state.label;
-        capExpanded.hidden = false;
-      } else if (capExpanded) {
-        capExpanded.hidden = true;
-      }
-    }
-  }
-
-  // === Initial state load ===
-  async function loadState() {
-    try {
-      const res = await fetch(GAS_URL + '?ts=' + Date.now(), { method: 'GET', mode: 'cors' });
-      if (!res.ok) return;
-      const text = await res.text();
-      try {
-        const json = JSON.parse(text);
-        renderState(json);
-      } catch (_) {
-        // doGetがプレーンテキスト("XiX signup endpoint is alive.")の旧版を返した場合は無視
-      }
-    } catch (e) {
-      console.warn('[signup] loadState failed', e);
-    }
-  }
-  loadState();
-
-  // === Waitlist mode show form ===
-  if (waitlistShowBtn) {
-    waitlistShowBtn.addEventListener('click', () => {
-      if (waitlistIntro) waitlistIntro.hidden = true;
-      form.hidden = false;
-      // フォーム見出しなど書き換え
-      const ctaTitle = document.querySelector('.cta-title');
-      if (ctaTitle) ctaTitle.textContent = 'ウェイティングリスト 登録フォーム';
-      btnText.textContent = 'ウェイティングリストに登録する';
-      form.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  }
-
-  // === Helpers ===
-  function setSending(sending) {
-    submitBtn.disabled = sending;
-    submitBtn.classList.toggle('is-sending', sending);
-    btnText.textContent = sending
-      ? '送信中…'
-      : (isWaitlistMode ? 'ウェイティングリストに登録する' : '先行受付に申し込む');
-  }
-
-  function showError(msg) {
-    alert('送信エラー: ' + msg + '\n\nお手数ですが info@tonchi.works までメールでご連絡ください。');
-  }
-
-  function serializeForm() {
-    const fd = new FormData(form);
-    const data = {};
-    for (const [k, v] of fd.entries()) data[k] = String(v).trim();
-    data.waitlist = !!isWaitlistMode;
-    data._ua = navigator.userAgent;
-    data._referrer = document.referrer || '';
-    data._ts = new Date().toISOString();
-    return data;
-  }
-
-  // === Submit ===
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
-    if (!form.checkValidity()) {
-      form.reportValidity();
+    err.hidden = true;
+
+    // 必須チェック（どこが足りないかを示す）
+    const missing = [...form.querySelectorAll('[required]')].filter(el => !el.value.trim() || !el.checkValidity());
+    form.querySelectorAll('[aria-invalid]').forEach(el => el.removeAttribute('aria-invalid'));
+    if (missing.length) {
+      missing.forEach(el => el.setAttribute('aria-invalid', 'true'));
+      const names = missing.map(el => el.closest('label').querySelector('span').firstChild.textContent.trim());
+      showError(names.join('・') + ' を入力してください。' + (missing.some(el => el.name === 'stores') ? '店舗数は半角数字で入力します。' : ''));
+      missing[0].focus();
       return;
     }
+    // bot対策：ハニーポット／表示直後の送信は送らずに完了表示
+    if (form.website.value || Date.now() - LOADED_AT < MIN_FORM_AGE_MS) { done(); return; }
 
-    // bot対策1: honeypot が埋まっていたら無音で成功画面（リクエストは送らない）
-    const honeypotEl = form.querySelector('input[name="_honeypot"]');
-    if (honeypotEl && honeypotEl.value.trim().length > 0) {
-      form.hidden = true;
-      thanks.hidden = false;
-      thanks.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      return;
-    }
-
-    // bot対策2: フォーム表示から送信までが早すぎる場合は無音で成功画面
-    const elapsed = Date.now() - PAGE_LOADED_AT;
-    if (elapsed < MIN_FORM_AGE_MS) {
-      form.hidden = true;
-      thanks.hidden = false;
-      thanks.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      return;
-    }
-
-    // bot対策3: 店舗数が数字でない場合
-    const storesEl = form.querySelector('input[name="stores"]');
-    if (storesEl) {
-      const v = storesEl.value.trim();
-      if (!/^[0-9]{1,4}$/.test(v) || parseInt(v, 10) < 1) {
-        storesEl.focus();
-        storesEl.setCustomValidity('店舗数は半角数字（1〜9999）で入力してください');
-        storesEl.reportValidity();
-        setTimeout(() => storesEl.setCustomValidity(''), 100);
-        return;
-      }
-    }
-
-    const data = serializeForm();
-    if (GAS_URL.includes('REPLACE_WITH_DEPLOYED_URL')) {
-      showError('フォームの送信先が未設定です（運用者にお知らせください）');
-      return;
-    }
+    const fd = new FormData(form);
+    const kind = fd.get('kind') || 'お問い合わせ';
+    const data = {
+      company: fd.get('company').trim(), name: fd.get('name').trim(), role: (fd.get('role') || '').trim(),
+      email: fd.get('email').trim(), phone: (fd.get('phone') || '').trim(), stores: fd.get('stores').trim(),
+      pbrain: fd.get('pbrain') || '', challenges: `【${kind}】` + (fd.get('challenges') || '').trim(),
+      source: 'tnc-works.com 2026renewal', website: '',
+    };
     setSending(true);
     try {
-      const res = await fetch(GAS_URL, {
-        method: 'POST',
-        mode: 'cors',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(data),
-      });
+      const res = await fetch(GAS_URL, { method: 'POST', mode: 'cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(data) });
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const json = await res.json().catch(() => ({ ok: true }));
       if (json && json.ok === false) throw new Error(json.error || 'unknown');
-
-      // 成功：サンクス画面へ（ウェイトリストかで文言切替）
-      form.hidden = true;
-      if (isWaitlistMode) {
-        if (thanksTitle) thanksTitle.textContent = 'ウェイティングリストにご登録いただきました';
-        if (thanksBody) thanksBody.innerHTML = '二次受付開始の際に <b>登録順で優先的にご案内</b> いたします。<br>自動返信メールをお送りしましたのでご確認ください。';
-      } else {
-        if (thanksTitle) thanksTitle.textContent = 'お申込みを受け付けました';
-        if (thanksBody) thanksBody.innerHTML = '自動返信メールをお送りしました。<br>担当者より3営業日以内にご連絡いたします。';
-      }
-      thanks.hidden = false;
-      thanks.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-      // カウンター反映
-      if (json && json.state) renderState(json.state);
-    } catch (err) {
-      console.error('[signup] error', err);
-      showError(err.message || '不明なエラー');
+      done();
+    } catch (ex) {
       setSending(false);
+      const body = encodeURIComponent(Object.entries(data).map(([k, v]) => `${k}: ${v}`).join('\n'));
+      showError('送信できませんでした。通信状況を確認してもう一度お試しいただくか、');
+      err.insertAdjacentHTML('beforeend', `<a href="mailto:info@tonchi.works?subject=${encodeURIComponent('XiX ' + kind)}&body=${body}" style="color:inherit">入力内容をメールで送る</a>。`);
     }
   });
 })();

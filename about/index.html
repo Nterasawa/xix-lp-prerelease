@@ -1,186 +1,190 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>会社概要 ｜ 株式会社頓智WORKS</title>
-  <meta name="description" content="株式会社頓智WORKS（とんちワークス）は、パチンコホールに特化したシステム開発会社。自社SaaS「XiX（ザイクス）」と業界定番P-Brainの受託開発を両輪に、"勘の経営"を"数値の経営"へ書き換えます。代表：寺澤尚己（パチンコ業界18年）。東京都新宿区。">
-  <meta property="og:title" content="会社概要 ｜ 株式会社頓智WORKS">
-  <meta property="og:description" content="パチンコホール特化のシステム開発会社。自社SaaS XiX と P-Brain 受託開発を両輪に。">
-  <meta property="og:type" content="website">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css">
-  <style>
-    .about-body { padding: 120px 24px 80px; max-width: 860px; margin: 0 auto; }
-    .about-back { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); margin-bottom: 32px; }
-    .about-back:hover { color: var(--accent-1); }
-    .about-title { font-size: 40px; font-weight: 900; margin-bottom: 16px; letter-spacing: -0.02em; }
-    .about-lead { font-size: 16px; color: var(--text-secondary); line-height: 1.9; margin-bottom: 56px; }
-    .about-section { margin-bottom: 48px; }
-    .about-section h2 { font-size: 22px; font-weight: 800; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border); letter-spacing: 0.02em; }
-    .about-table { width: 100%; border-collapse: collapse; }
-    .about-table th, .about-table td { padding: 14px 16px; text-align: left; font-size: 14px; vertical-align: top; border-bottom: 1px solid var(--border); }
-    .about-table th { width: 160px; color: var(--text-secondary); font-weight: 600; background: var(--bg-card); }
-    .about-table td { color: var(--text-primary); line-height: 1.9; }
-    .about-table td b { color: var(--accent-1); }
-    .about-achievements { display: grid; gap: 14px; }
-    .achievement-item { padding: 18px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; }
-    .achievement-item h3 { font-size: 16px; font-weight: 800; color: var(--text-primary); margin-bottom: 6px; }
-    .achievement-item p { font-size: 13px; color: var(--text-secondary); line-height: 1.8; }
-    .achievement-item .ach-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; color: var(--accent-1); background: rgba(99,102,241,0.1); padding: 3px 8px; border-radius: 99px; margin-bottom: 8px; }
-    .ceo-card { display: grid; grid-template-columns: 160px 1fr; gap: 24px; padding: 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; align-items: start; }
-    .ceo-card .ceo-photo { width: 160px; height: 160px; border-radius: 12px; background: linear-gradient(135deg, rgba(99,102,241,0.3), rgba(139,92,246,0.2)); display: flex; align-items: center; justify-content: center; font-family: var(--font-en); font-size: 44px; font-weight: 900; color: rgba(255,255,255,0.9); letter-spacing: -0.04em; }
-    .ceo-card .ceo-name { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
-    .ceo-card .ceo-title { font-size: 13px; color: var(--text-secondary); margin-bottom: 14px; }
-    .ceo-card .ceo-bio { font-size: 13px; color: var(--text-secondary); line-height: 1.9; }
-    .ceo-card .ceo-bio b { color: var(--text-primary); font-weight: 700; }
-    .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
-    .contact-card { padding: 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; text-align: center; transition: all 0.3s var(--ease-out); }
-    .contact-card:hover { border-color: var(--accent-1); transform: translateY(-2px); }
-    .contact-card .c-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; color: var(--text-muted); margin-bottom: 8px; }
-    .contact-card .c-value { font-size: 15px; font-weight: 700; color: var(--text-primary); word-break: break-all; }
-    .contact-card a { color: inherit; }
-    .contact-card:hover .c-value { color: var(--accent-1); }
-    @media (max-width: 700px) {
-      .about-body { padding: 100px 20px 60px; }
-      .about-title { font-size: 28px; }
-      .about-table th { width: 110px; font-size: 12px; padding: 10px 10px; }
-      .about-table td { font-size: 13px; padding: 10px 12px; }
-      .ceo-card { grid-template-columns: 1fr; text-align: center; }
-      .ceo-card .ceo-photo { width: 140px; height: 140px; margin: 0 auto; }
-      .contact-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>会社概要｜株式会社頓智WORKS</title>
+<meta name="description" content="株式会社頓智WORKSは、パチンコホールに特化したシステム開発会社です。自社SaaS「XiX」と、P-Brainの受託開発を両輪に、現場に効くシステムをつくっています。">
+<meta name="theme-color" content="#0A0F24">
+<link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@200;300;500;700&family=JetBrains+Mono:wght@400;600&family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css?v=1790474391">
+<style>
+  .co-hero { padding: 150px 0 90px; position: relative; overflow: hidden; }
+  .co-hero h1 { font-family: var(--f-display); font-weight: 800; font-size: clamp(40px, 7vw, 96px); line-height: 1.15; letter-spacing: -.02em; margin: 0 0 26px; }
+  .co-hero h1 em { font-style: normal; color: var(--amber); }
+  .co-hero p { max-width: 640px; color: var(--on-ink-sub); margin: 0; }
+  .co-mark { position: absolute; right: -60px; top: 60px; width: min(46vw, 520px); color: var(--ink-3); opacity: .9; pointer-events: none; }
+  .co-mark polygon { fill: none; stroke: var(--signal); stroke-width: 1.2; }
+  .co-table { width: 100%; border-collapse: collapse; }
+  .co-table th, .co-table td { text-align: left; vertical-align: top; padding: 20px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+  .co-table th { width: 180px; color: var(--sub); font-weight: 500; }
+  .ceo { display: grid; grid-template-columns: 220px 1fr; gap: clamp(24px, 5vw, 64px); align-items: start; }
+  .ceo-mono { aspect-ratio: 1; border-radius: 20px; background: var(--ink); color: #fff; display: grid; place-items: center; font-family: var(--f-display); font-size: 64px; font-weight: 800; position: relative; overflow: hidden; }
+  .ceo-mono::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 30% 20%, rgba(61,148,241,.5), transparent 60%); }
+  .ceo h3 { font-family: var(--f-display); font-size: 28px; margin: 0 0 4px; }
+  .ceo .role { color: var(--sub); font-size: 13px; margin: 0 0 20px; }
+  .ceo p { color: var(--sub); margin: 0 0 12px; }
+  .ceo b { color: var(--text); }
+  .tl { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); position: relative; }
+  .tl::before { content: ""; position: absolute; left: 0; right: 0; top: 7px; height: 2px; background: var(--line); }
+  .tl::after { content: ""; position: absolute; left: 0; top: 7px; height: 2px; background: var(--signal); width: 0; transition: width 2.2s cubic-bezier(.2,.8,.2,1); }
+  .tl.in::after { width: 100%; }
+  .tl li { position: relative; padding: 34px 20px 0 0; }
+  .tl li::before { content: ""; position: absolute; left: 0; top: 0; width: 16px; height: 16px; border-radius: 50%; background: var(--paper); border: 2px solid var(--signal); }
+  .tl li:last-child::before { background: var(--amber); border-color: var(--amber); }
+  .tl time { font-family: var(--f-num); font-weight: 200; font-size: 40px; letter-spacing: -.03em; display: block; line-height: 1; margin-bottom: 10px; }
+  .tl p { margin: 0; color: var(--sub); font-size: 14px; }
+  .prods { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .prod { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 28px; }
+  .prod .tag { margin-bottom: 12px; }
+  .prod h3 { font-family: var(--f-display); font-size: 26px; margin: 0 0 8px; }
+  .prod p { margin: 0; color: var(--sub); font-size: 15px; }
+  .prod.main { grid-column: span 2; background: var(--ink); color: var(--on-ink); border-color: var(--ink); display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; }
+  .prod.main p { color: var(--on-ink-sub); }
+  .prod.main img { height: 44px; width: auto; filter: invert(1); margin-bottom: 14px; }
+  @media (max-width: 800px) {
+    .ceo { grid-template-columns: 1fr; } .ceo-mono { max-width: 160px; }
+    .tl { grid-template-columns: 1fr 1fr; row-gap: 30px; } .tl::before, .tl::after { display: none; }
+    .prods { grid-template-columns: 1fr; } .prod.main { grid-column: auto; grid-template-columns: 1fr; }
+    .co-table th { width: 110px; }
+  }
+</style>
 </head>
 <body>
-  <!-- NAV -->
-  <nav class="nav" id="nav">
-    <div class="nav-inner">
-      <a href="../" class="nav-logo">
-        <svg class="nav-logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="40" height="40" rx="8" fill="url(#logo-gradient-about)"/>
-          <path d="M10 14L16 26L20 18L24 26L30 14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <defs>
-            <linearGradient id="logo-gradient-about" x1="0" y1="0" x2="40" y2="40">
-              <stop offset="0%" stop-color="#6366f1"/>
-              <stop offset="100%" stop-color="#8b5cf6"/>
-            </linearGradient>
-          </defs>
-        </svg>
-        <span class="nav-logo-text">XiX</span>
-      </a>
-      <div class="nav-links">
-        <a href="../" class="nav-link">XiX LP</a>
-        <a href="../#features" class="nav-link">6つの機能</a>
-        <a href="./" class="nav-link">会社概要</a>
-        <a href="../#cta-section" class="nav-link nav-link-cta">先行受付</a>
-      </div>
-    </div>
+<a class="skip" href="#main">本文へスキップ</a>
+<header class="nav solid" id="nav">
+  <a class="nav-brand" href="../" aria-label="XiX トップへ">
+    <img src="../img/xix-logo.svg" alt="XiX" class="nav-logo">
+    <span class="nav-by">by 頓智WORKS</span>
+  </a>
+  <nav class="nav-links" aria-label="サイト内">
+    <a href="../#updates">アップデート</a>
+    <a href="../#features">できること</a>
+    <a href="../#how">データの作り方</a>
+    <a href="./" aria-current="page">会社概要</a>
   </nav>
+  <a class="btn btn-sm" href="../#contact">デモを申し込む</a>
+</header>
 
-  <main class="about-body">
-    <a href="../" class="about-back">← XiX トップへ戻る</a>
-    <h1 class="about-title">会社概要</h1>
-    <p class="about-lead">
-      株式会社頓智WORKS（とんちワークス）は、パチンコホールに特化したシステム開発会社です。<br>
-      自社SaaS <b style="color:#a5b4fc;">XiX（ザイクス）</b> と、業界定番プロダクト <b style="color:#a5b4fc;">P-Brain</b> の受託開発を両輪に、<br>
-      "勘の経営"を"数値の経営"へ書き換えるシステムを、現場目線でつくり続けています。
-    </p>
-
-    <section class="about-section">
-      <h2>基本情報</h2>
-      <table class="about-table">
-        <tr><th>会社名</th><td>株式会社 頓智WORKS（トンチワークス）</td></tr>
-        <tr><th>創業</th><td>2016年12月8日</td></tr>
-        <tr><th>代表取締役</th><td>寺澤 尚己（てらさわ なおき）</td></tr>
-        <tr><th>所在地</th><td>〒169-0072 東京都新宿区大久保2-2-11 新宿太陽ビル 5F</td></tr>
-        <tr><th>電話</th><td><a href="tel:03-6457-3737" style="color:#a5b4fc;">03-6457-3737</a></td></tr>
-        <tr><th>メール</th><td><a href="mailto:info@tonchi.works" style="color:#a5b4fc;">info@tonchi.works</a></td></tr>
-        <tr><th>事業内容</th><td>システム開発／自社SaaS「<b>XiX</b>」提供／P-Brain 受託開発</td></tr>
-      </table>
-    </section>
-
-    <section class="about-section">
-      <h2>代表挨拶</h2>
-      <div class="ceo-card">
-        <div class="ceo-photo">TN</div>
-        <div>
-          <div class="ceo-name">寺澤 尚己</div>
-          <div class="ceo-title">代表取締役／頓智WORKS</div>
-          <p class="ceo-bio">
-            1985年東京都生まれ。<br>
-            2008年 <b>株式会社光通信</b> 入社後、子会社 <b>株式会社GOLUCK</b> へ出向し、<br>
-            アミューズメント業界で営業・サポート部門責任者を経験。<br>
-            <b>株式会社みなパチ</b> にて執行役員としてパチンコポータルサイト「みなパチ」を開設。<br>
-            NPO法人ぱちんこ情熱リーグ 理事・プロモーション委員長を歴任。<br>
-            2019年7月、株式会社ビレッジフィールズ（現：頓智WORKS）の代表取締役に就任。<br>
-            <span style="color:#a5b4fc;">パチンコ業界18年のキャリア</span>を土台に、現場に効くシステムをつくっています。
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="about-section">
-      <h2>主な実績・プロダクト</h2>
-      <div class="about-achievements">
-        <div class="achievement-item">
-          <span class="ach-tag">自社SaaS</span>
-          <h3>XiX（ザイクス）</h3>
-          <p>パチンコホール特化のイベントインテリジェンスSaaS。新台入替・取材・ライター来店・景品イベントを自動収集し、自店と競合店を同じカレンダーで俯瞰。P-Brain連動で"競合補正"された効果測定を実現。2026年4月25日 先行受付開始。</p>
-        </div>
-        <div class="achievement-item">
-          <span class="ach-tag">受託開発</span>
-          <h3>P-Brain 一部受託業務</h3>
-          <p>パチンコ業界の定番データプラットフォーム P-Brain の開発パートナーとして、一部機能の受託開発を継続。</p>
-        </div>
-        <div class="achievement-item">
-          <span class="ach-tag">自社プロダクト（開発実績）</span>
-          <h3>FACETRACK</h3>
-          <p>顔認証追従システム。</p>
-        </div>
-        <div class="achievement-item">
-          <span class="ach-tag">自社プロダクト（開発実績）</span>
-          <h3>QiF</h3>
-          <p>非接触充電マーケティングシステム。</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="about-section">
-      <h2>お問い合わせ</h2>
-      <div class="contact-grid">
-        <a class="contact-card" href="mailto:info@tonchi.works">
-          <div class="c-label">EMAIL</div>
-          <div class="c-value">info@tonchi.works</div>
-        </a>
-        <a class="contact-card" href="tel:03-6457-3737">
-          <div class="c-label">PHONE</div>
-          <div class="c-value">03-6457-3737</div>
-        </a>
-        <a class="contact-card" href="https://lin.ee/xaWMqdW" target="_blank" rel="noopener">
-          <div class="c-label">LINE</div>
-          <div class="c-value">LINE公式アカウント</div>
-        </a>
-      </div>
-    </section>
-
-    <section class="about-section" style="text-align: center; margin-top: 64px;">
-      <a href="../" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px;">
-        <span>XiX LPを見る</span>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-bottom">
-        <p>&copy; 2026 株式会社頓智WORKS. All rights reserved.</p>
-        <p class="footer-address">東京都新宿区大久保2-2-11 新宿太陽ビル 5F</p>
-      </div>
+<main id="main">
+  <section class="co-hero">
+    <div class="wrap">
+      <p class="eyebrow mono">Company — TONCHI WORKS Inc.</p>
+      <h1>勘の経営を、<br><em>数字の経営</em>へ。</h1>
+      <p>株式会社頓智WORKS（とんちワークス）は、パチンコホールに特化したシステム開発会社です。自社SaaS <b>XiX（ザイクス）</b> と、業界定番プロダクト <b>P-Brain</b> の受託開発を両輪に、現場に効くシステムをつくっています。</p>
     </div>
-  </footer>
+    <svg class="co-mark" viewBox="-10 -10 276 276" aria-hidden="true">
+      <polygon points="108.1 0 21.93 0 65.01 43.09 108.1 0"/><polygon points="0 24.12 0 108.1 41.99 66.11 0 24.12"/><polygon points="255.81 233.88 255.81 147.7 212.72 190.79 255.81 233.88"/><polygon points="140.51 164.63 163.53 141.6 189.7 167.77 255.81 101.66 255.81 23.02 234.54 44.28 211.52 21.26 232.78 0 154.14 0 88.03 66.11 114.2 92.28 91.18 115.3 65.01 89.13 0 154.14 0 232.79 104.33 128.45 104.33 128.45 127.35 105.43 127.35 105.43 198.37 34.42 221.39 57.44 220.83 58 150.38 128.45 127.35 151.47 56.12 222.7 56.13 222.7 23.02 255.81 101.66 255.81 166.67 190.79 140.51 164.63"/><polygon points="147.7 255.81 231.69 255.81 189.7 213.81 147.7 255.81"/>
+    </svg>
+  </section>
+
+  <div class="paper">
+    <section class="sec">
+      <div class="wrap wrap-narrow">
+        <header class="sec-head"><p class="eyebrow mono">Profile</p><h2 class="sec-title">基本情報</h2></header>
+        <table class="co-table">
+          <tr><th>会社名</th><td>株式会社 頓智WORKS（とんちワークス）</td></tr>
+          <tr><th>創業</th><td>2016年12月8日</td></tr>
+          <tr><th>代表取締役</th><td>寺澤 尚己（てらさわ なおき）</td></tr>
+          <tr><th>所在地</th><td>〒169-0072 東京都新宿区大久保2-2-11 新宿太陽ビル 5F</td></tr>
+          <tr><th>電話</th><td><a href="tel:03-6457-3737">03-6457-3737</a></td></tr>
+          <tr><th>メール</th><td><a href="mailto:info@tonchi.works">info@tonchi.works</a></td></tr>
+          <tr><th>事業内容</th><td>システム開発／自社SaaS「XiX」の提供／P-Brain 受託開発</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="wrap">
+        <header class="sec-head"><p class="eyebrow mono">History</p><h2 class="sec-title">あゆみ</h2></header>
+        <ol class="tl" id="tl">
+          <li><time>2016</time><p>株式会社ビレッジフィールズ（現：頓智WORKS）創業</p></li>
+          <li><time>2019</time><p>寺澤 尚己が代表取締役に就任</p></li>
+          <li><time>2026.04</time><p>自社SaaS「XiX」先行受付開始</p></li>
+          <li><time>2026.09</time><p>XiX「全国データ」公開（地域イベント特性・来店ゲストランキング）</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="wrap">
+        <header class="sec-head"><p class="eyebrow mono">Message</p><h2 class="sec-title">代表挨拶</h2></header>
+        <div class="ceo">
+          <div class="ceo-mono" aria-hidden="true">寺澤</div>
+          <div>
+            <h3>寺澤 尚己</h3>
+            <p class="role">代表取締役／株式会社頓智WORKS</p>
+            <p>1985年東京都生まれ。2008年 株式会社光通信に入社後、子会社の株式会社GOLUCKへ出向し、アミューズメント業界で営業・サポート部門の責任者を経験。株式会社みなパチでは執行役員としてパチンコポータルサイト「みなパチ」を開設しました。NPO法人ぱちんこ情熱リーグの理事・プロモーション委員長も歴任しています。</p>
+            <p>2019年7月、株式会社ビレッジフィールズ（現：頓智WORKS）の代表取締役に就任。<b>パチンコ業界18年のキャリア</b>を土台に、ホールの現場で本当に使われるシステムをつくっています。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="wrap">
+        <header class="sec-head"><p class="eyebrow mono">Products</p><h2 class="sec-title">主な実績・プロダクト</h2></header>
+        <div class="prods">
+          <div class="prod main">
+            <div>
+              <img src="../img/xix-logo.svg" alt="XiX">
+              <span class="tag tag-new">自社SaaS</span>
+              <p style="margin-top:12px">パチンコホール特化のイベントインテリジェンス。新台入替・取材・来店・特定日などのイベント情報を毎日集めて名寄せし、稼働リフトとして効果を数字にします。2026年4月 先行受付開始、9月に全国データを公開。</p>
+            </div>
+            <a class="btn" href="../">XiX を見る →</a>
+          </div>
+          <div class="prod"><span class="tag">受託開発</span><h3>P-Brain</h3><p>パチンコ業界の定番データプラットフォーム P-Brain の開発パートナーとして、一部機能の受託開発を継続しています。</p></div>
+          <div class="prod"><span class="tag">自社プロダクト（開発実績）</span><h3>FACETRACK</h3><p>顔認証追従システム。</p></div>
+          <div class="prod"><span class="tag">自社プロダクト（開発実績）</span><h3>QiF</h3><p>非接触充電マーケティングシステム。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec sec-contact">
+      <div class="wrap contact-grid">
+        <div class="contact-text">
+          <p class="eyebrow mono">Contact</p>
+          <h2 class="sec-title">お問い合わせ</h2>
+          <p>XiXのデモ・資料請求は、トップページのフォームからお申し込みいただけます。</p>
+          <a class="btn btn-lg" href="../#contact" style="margin-top:14px">フォームへ進む →</a>
+        </div>
+        <div class="contact-alt" style="font-size:18px">
+          <a href="mailto:info@tonchi.works" class="mono">info@tonchi.works</a>
+          <a href="tel:03-6457-3737" class="mono">03-6457-3737</a>
+          <a href="https://lin.ee/xaWMqdW" target="_blank" rel="noopener" class="alt-line">LINEで相談する ↗</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div><img src="../img/xix-logo.svg" alt="XiX" class="foot-logo"><p>パチンコホール特化のイベントインテリジェンス</p></div>
+    <div class="foot-co">
+      <p><b>株式会社頓智WORKS</b></p>
+      <p>〒169-0072 東京都新宿区大久保2-2-11 新宿太陽ビル 5F</p>
+      <p class="mono">03-6457-3737 ／ info@tonchi.works</p>
+    </div>
+    <nav class="foot-nav" aria-label="フッター"><a href="../">XiX トップ</a><a href="../#updates">アップデート</a><a href="../#faq">FAQ</a><a href="../#contact">お問い合わせ</a></nav>
+  </div>
+  <p class="foot-copy mono">© 2026 TONCHI WORKS Inc.</p>
+</footer>
+<script>
+  // あゆみのレールを伸ばし、マークの線を描く
+  (function () {
+    var tl = document.getElementById('tl');
+    if (!('IntersectionObserver' in window)) { tl.classList.add('in'); return; }
+    new IntersectionObserver(function (es, io) { if (es[0].isIntersecting) { tl.classList.add('in'); io.disconnect(); } }, { threshold: .4 }).observe(tl);
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll('.co-mark polygon').forEach(function (p, i) {
+      var L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = reduce ? 0 : L;
+      if (!reduce) { p.style.transition = 'stroke-dashoffset 2.4s cubic-bezier(.6,0,.2,1) ' + (i * .25) + 's'; requestAnimationFrame(function () { requestAnimationFrame(function () { p.style.strokeDashoffset = 0; }); }); }
+    });
+  })();
+</script>
 </body>
 </html>
